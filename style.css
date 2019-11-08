@@ -1,0 +1,16 @@
+table.opcode-table {
+	border: 2px solid black;
+}
+th, td {
+	border: 1px solid black;
+	width: 9em;
+}
+td.empty {
+	text-align: center;
+	color: #A00;
+}
+td.number {
+	width: 1em;
+	color: #900;
+	text-align: center;
+}

@@ -1,0 +1,274 @@
+<html>
+<head>
+<title>eZ80 Opcode Table</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>eZ80 Opcode Table</h1>
+<p>In column 0xDDnndd, you may substitute 0xFDnndd for IY instead of IX.<br>
+In column 0xFDCBddnn, you may substitute 0xDDCBddnn for IX instead of IY.</p>
+<table class="opcode-table">
+<thead>
+<tr><th>0xnn</th><th>nn</th><th>0xDDnndd</th><th>0xCBnn</th><th>0xFDCBddnn</th><th>0xEDnn</th></tr>
+</thead>
+<tbody>
+<tr><td class="number">00</td><td>NOP              </td><td class="empty">-               </td><td>RLC  B           </td><td class="empty">-                </td><td>IN0  B,(&00)</td></tr>
+<tr><td class="number">01</td><td>LD   BC,&0000    </td><td class="empty">-               </td><td>RLC  C           </td><td class="empty">-                </td><td>OUT0 (&00),B</td></tr>
+<tr><td class="number">02</td><td>LD   (BC),A      </td><td class="empty">-               </td><td>RLC  D           </td><td class="empty">-                </td><td>LEA  BC,IX+d</td></tr>
+<tr><td class="number">03</td><td>INC  BC          </td><td class="empty">-               </td><td>RLC  E           </td><td class="empty">-                </td><td>LEA  BC,IY+d</td></tr>
+<tr><td class="number">04</td><td>INC  B           </td><td class="empty">-               </td><td>RLC  H           </td><td class="empty">-                </td><td>TST  A,B</td></tr>
+<tr><td class="number">05</td><td>DEC  B           </td><td class="empty">-               </td><td>RLC  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">06</td><td>LD   B,&00       </td><td class="empty">-               </td><td>RLC  (HL)        </td><td>RLC (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">07</td><td>RLCA             </td><td>LD   BC,(IX+d)  </td><td>RLC  A           </td><td class="empty">-                </td><td>LD   BC,(HL)</td></tr>
+<tr><td class="number">08</td><td>EX   AF,AF'      </td><td class="empty">-               </td><td>RRC  B           </td><td class="empty">-                </td><td>IN0  C,(&00)</td></tr>
+<tr><td class="number">09</td><td>ADD  HL,BC       </td><td>ADD  IX,BC      </td><td>RRC  C           </td><td class="empty">-                </td><td>OUT0 (&00),C</td></tr>
+<tr><td class="number">0A</td><td>LD   A,(BC)      </td><td class="empty">-               </td><td>RRC  D           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">0B</td><td>DEC  BC          </td><td class="empty">-               </td><td>RRC  E           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">0C</td><td>INC  C           </td><td class="empty">-               </td><td>RRC  H           </td><td class="empty">-                </td><td>TST  A,C</td></tr>
+<tr><td class="number">0D</td><td>DEC  C           </td><td class="empty">-               </td><td>RRC  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">0E</td><td>LD   C,&00       </td><td class="empty">-               </td><td>RRC  (HL)        </td><td>RRC (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">0F</td><td>RRCA             </td><td>LD   (IX+d),BC  </td><td>RRC  A           </td><td class="empty">-                </td><td>LD   (HL),BC</td></tr>
+<tr><td class="number">10</td><td>DJNZ dist        </td><td class="empty">-               </td><td>RL   B           </td><td class="empty">-                </td><td>IN0  D,(&00)</td></tr>
+<tr><td class="number">11</td><td>LD   DE,&0000    </td><td class="empty">-               </td><td>RL   C           </td><td class="empty">-                </td><td>OUT0 (&00),D</td></tr>
+<tr><td class="number">12</td><td>LD   (DE),A      </td><td class="empty">-               </td><td>RL   D           </td><td class="empty">-                </td><td>LEA  DE,IX+d</td></tr>
+<tr><td class="number">13</td><td>INC  DE          </td><td class="empty">-               </td><td>RL   E           </td><td class="empty">-                </td><td>LEA  DE,IY+d</td></tr>
+<tr><td class="number">14</td><td>INC  D           </td><td class="empty">-               </td><td>RL   H           </td><td class="empty">-                </td><td>TST  A,D</td></tr>
+<tr><td class="number">15</td><td>DEC  D           </td><td class="empty">-               </td><td>RL   L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">16</td><td>LD   D,&00       </td><td class="empty">-               </td><td>RL   (HL)        </td><td>RL  (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">17</td><td>RLA              </td><td>LD   DE,(IX+d)  </td><td>RL   A           </td><td class="empty">-                </td><td>LD   DE,(HL)</td></tr>
+<tr><td class="number">18</td><td>JR   dist        </td><td class="empty">-               </td><td>RR   B           </td><td class="empty">-                </td><td>IN0  E,(&00)</td></tr>
+<tr><td class="number">19</td><td>ADD  HL,DE       </td><td>ADD  IX,DE      </td><td>RR   C           </td><td class="empty">-                </td><td>OUT0 (&00),E</td></tr>
+<tr><td class="number">1A</td><td>LD   A,(DE)      </td><td class="empty">-               </td><td>RR   D           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">1B</td><td>DEC  DE          </td><td class="empty">-               </td><td>RR   E           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">1C</td><td>INC  E           </td><td class="empty">-               </td><td>RR   H           </td><td class="empty">-                </td><td>TST  A,E</td></tr>
+<tr><td class="number">1D</td><td>DEC  E           </td><td class="empty">-               </td><td>RR   L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">1E</td><td>LD   E,&00       </td><td class="empty">-               </td><td>RR   (HL)        </td><td>RR  (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">1F</td><td>RRA              </td><td>LD   (IX+d),DE  </td><td>RR   A           </td><td class="empty">-                </td><td>LD   (HL),DE</td></tr>
+<tr><td class="number">20</td><td>JR   NZ,dist     </td><td class="empty">-               </td><td>SLA  B           </td><td class="empty">-                </td><td>IN0  H,(&00)</td></tr>
+<tr><td class="number">21</td><td>LD   HL,&0000    </td><td>LD   IX,&0000   </td><td>SLA  C           </td><td class="empty">-                </td><td>OUT0 (&00),H</td></tr>
+<tr><td class="number">22</td><td>LD   (&0000),HL  </td><td>LD   (&0000),IX </td><td>SLA  D           </td><td class="empty">-                </td><td>LEA  HL,IX+d</td></tr>
+<tr><td class="number">23</td><td>INC  HL          </td><td>INC  IX         </td><td>SLA  E           </td><td class="empty">-                </td><td>LEA  HL,IY+d</td></tr>
+<tr><td class="number">24</td><td>INC  H           </td><td>INC  IXH        </td><td>SLA  H           </td><td class="empty">-                </td><td>TST  A,H</td></tr>
+<tr><td class="number">25</td><td>DEC  H           </td><td>DEC  IXH        </td><td>SLA  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">26</td><td>LD   H,&00       </td><td>LD   IXH,&00    </td><td>SLA  (HL)        </td><td>SLA (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">27</td><td>DAA              </td><td>LD   HL,(IX+d)  </td><td>SLA  A           </td><td class="empty">-                </td><td>LD   HL,(HL)</td></tr>
+<tr><td class="number">28</td><td>JR   Z,dist      </td><td class="empty">-               </td><td>SRA  B           </td><td class="empty">-                </td><td>IN0  L,(&00)</td></tr>
+<tr><td class="number">29</td><td>ADD  HL,HL       </td><td>ADD  IX,IX      </td><td>SRA  C           </td><td class="empty">-                </td><td>OUT0 (&00),L</td></tr>
+<tr><td class="number">2A</td><td>LD   HL,(&0000)  </td><td>LD   IX,(&0000) </td><td>SRA  D           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">2B</td><td>DEC  HL          </td><td>DEC  IX         </td><td>SRA  E           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">2C</td><td>INC  L           </td><td>INC  IXL        </td><td>SRA  H           </td><td class="empty">-                </td><td>TST  A,L</td></tr>
+<tr><td class="number">2D</td><td>DEC  L           </td><td>DEC  IXL        </td><td>SRA  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">2E</td><td>LD   L,&00       </td><td>LD   IXL,&00    </td><td>SRA  (HL)        </td><td>SRA (IY+d)       </td><td class="empty">-</td></tr>
+<tr><td class="number">2F</td><td>CPL              </td><td>LD   (IX+d),HL  </td><td>SRA  A           </td><td class="empty">-                </td><td>LD   (HL),HL</td></tr>
+<tr><td class="number">30</td><td>JR   NC,dist     </td><td class="empty">-               </td><td class="empty">-                </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">31</td><td>LD   SP,&0000    </td><td>LD   IY,(IX+d)  </td><td class="empty">-                </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">32</td><td>LD   (&0000),A   </td><td class="empty">-               </td><td class="empty">-                </td><td class="empty">-                </td><td>LEA  IX,IX+d</td></tr>
+<tr><td class="number">33</td><td>INC  SP          </td><td class="empty">-               </td><td class="empty">-                </td><td class="empty">-                </td><td>LEA  IY,IY+d</td></tr>
+<tr><td class="number">34</td><td>INC  (HL)        </td><td>INC  (IX+d)     </td><td class="empty">-                </td><td class="empty">-                </td><td>TST  A,(HL)</td></tr>
+<tr><td class="number">35</td><td>DEC  (HL)        </td><td>DEC  (IX+d)     </td><td class="empty">-                </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">36</td><td>LD   (HL),&00    </td><td>LD   (IX+d),&00 </td><td class="empty">-                </td><td class="empty">-                </td><td>LD   IY,(HL)</td></tr>
+<tr><td class="number">37</td><td>SCF              </td><td>LD   IX,(IX+d)  </td><td class="empty">-                </td><td class="empty">-                </td><td>LD   IX,(HL)</td></tr>
+<tr><td class="number">38</td><td>JR   C,dist      </td><td class="empty">-               </td><td>SRL  B           </td><td class="empty">-                </td><td>IN0  A,(&00)</td></tr>
+<tr><td class="number">39</td><td>ADD  HL,SP       </td><td>ADD  IX,SP      </td><td>SRL  C           </td><td class="empty">-                </td><td>OUT0 (&00),A</td></tr>
+<tr><td class="number">3A</td><td>LD   A,(&0000)   </td><td class="empty">-               </td><td>SRL  D           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">3B</td><td>DEC  SP          </td><td class="empty">-               </td><td>SRL  E           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">3C</td><td>INC  A           </td><td class="empty">-               </td><td>SRL  H           </td><td class="empty">-                </td><td>TST  A,A</td></tr>
+<tr><td class="number">3D</td><td>DEC  A           </td><td class="empty">-               </td><td>SRL  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">3E</td><td>LD   A,&00       </td><td>LD   (IX+d),IY  </td><td>SRL  (HL)        </td><td>SRL (IY+d)       </td><td>LD  (HL),IY</td></tr>
+<tr><td class="number">3F</td><td>CCF              </td><td>LD   (IX+d),IX  </td><td>SRL  A           </td><td class="empty">-                </td><td>LD  (HL),IX</td></tr>
+<tr><td class="number">40</td><td>LD   B,B         </td><td class="empty">-               </td><td>BIT  0,B         </td><td class="empty">-                </td><td>IN   B,(BC)</td></tr>
+<tr><td class="number">41</td><td>LD   B,C         </td><td class="empty">-               </td><td>BIT  0,C         </td><td class="empty">-                </td><td>OUT  (BC),B</td></tr>
+<tr><td class="number">42</td><td>LD   B,D         </td><td class="empty">-               </td><td>BIT  0,D         </td><td class="empty">-                </td><td>SBC  HL,BC</td></tr>
+<tr><td class="number">43</td><td>LD   B,E         </td><td class="empty">-               </td><td>BIT  0,E         </td><td class="empty">-                </td><td>LD   (&0000),BC</td></tr>
+<tr><td class="number">44</td><td>LD   B,H         </td><td>LD   B,IXH      </td><td>BIT  0,H         </td><td class="empty">-                </td><td>NEG</td></tr>
+<tr><td class="number">45</td><td>LD   B,L         </td><td>LD   B,IXL      </td><td>BIT  0,L         </td><td class="empty">-                </td><td>RETN</td></tr>
+<tr><td class="number">46</td><td>LD   B,(HL)      </td><td>LD   B,(IX+d)   </td><td>BIT  0,(HL)      </td><td>BIT 0,(IY+d)     </td><td>IM   0</td></tr>
+<tr><td class="number">47</td><td>LD   B,A         </td><td class="empty">-               </td><td>BIT  0,A         </td><td class="empty">-                </td><td>LD   I,A</td></tr>
+<tr><td class="number">48</td><td>LD   C,B         </td><td class="empty">-               </td><td>BIT  1,B         </td><td class="empty">-                </td><td>IN   C,(BC)</td></tr>
+<tr><td class="number">49</td><td>LD   C,C         </td><td class="empty">-               </td><td>BIT  1,C         </td><td class="empty">-                </td><td>OUT  (BC),C</td></tr>
+<tr><td class="number">4A</td><td>LD   C,D         </td><td class="empty">-               </td><td>BIT  1,D         </td><td class="empty">-                </td><td>ADC  HL,BC</td></tr>
+<tr><td class="number">4B</td><td>LD   C,E         </td><td class="empty">-               </td><td>BIT  1,E         </td><td class="empty">-                </td><td>LD   BC,(&0000)</td></tr>
+<tr><td class="number">4C</td><td>LD   C,H         </td><td>LD   C,IXH      </td><td>BIT  1,H         </td><td class="empty">-                </td><td>MULT BC</td></tr>
+<tr><td class="number">4D</td><td>LD   C,L         </td><td>LD   C,IXL      </td><td>BIT  1,L         </td><td class="empty">-                </td><td>RETI</td></tr>
+<tr><td class="number">4E</td><td>LD   C,(HL)      </td><td>LD   C,(IX+d)   </td><td>BIT  1,(HL)      </td><td>BIT 1,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">4F</td><td>LD   C,A         </td><td class="empty">-               </td><td>BIT  1,A         </td><td class="empty">-                </td><td>LD   R,A</td></tr>
+<tr><td class="number">50</td><td>LD   D,B         </td><td class="empty">-               </td><td>BIT  2,B         </td><td class="empty">-                </td><td>IN   D,(BC)</td></tr>
+<tr><td class="number">51</td><td>LD   D,C         </td><td class="empty">-               </td><td>BIT  2,C         </td><td class="empty">-                </td><td>OUT  (BC),D</td></tr>
+<tr><td class="number">52</td><td>LD   D,D         </td><td class="empty">-               </td><td>BIT  2,D         </td><td class="empty">-                </td><td>SBC  HL,DE</td></tr>
+<tr><td class="number">53</td><td>LD   D,E         </td><td class="empty">-               </td><td>BIT  2,E         </td><td class="empty">-                </td><td>LD   (&0000),DE</td></tr>
+<tr><td class="number">54</td><td>LD   D,H         </td><td>LD   D,IXH      </td><td>BIT  2,H         </td><td class="empty">-                </td><td>LEA  IX,IY+d</td></tr>
+<tr><td class="number">55</td><td>LD   D,L         </td><td>LD   D,IXL      </td><td>BIT  2,L         </td><td class="empty">-                </td><td>LEA  IY,IX+d</td></tr>
+<tr><td class="number">56</td><td>LD   D,(HL)      </td><td>LD   D,(IX+d)   </td><td>BIT  2,(HL)      </td><td>BIT 2,(IY+d)     </td><td>IM   1</td></tr>
+<tr><td class="number">57</td><td>LD   D,A         </td><td class="empty">-               </td><td>BIT  2,A         </td><td class="empty">-                </td><td>LD   A,I</td></tr>
+<tr><td class="number">58</td><td>LD   E,B         </td><td class="empty">-               </td><td>BIT  3,B         </td><td class="empty">-                </td><td>IN   E,(BC)</td></tr>
+<tr><td class="number">59</td><td>LD   E,C         </td><td class="empty">-               </td><td>BIT  3,C         </td><td class="empty">-                </td><td>OUT  (BC),E</td></tr>
+<tr><td class="number">5A</td><td>LD   E,D         </td><td class="empty">-               </td><td>BIT  3,D         </td><td class="empty">-                </td><td>ADC  HL,DE</td></tr>
+<tr><td class="number">5B</td><td>LD   E,E         </td><td class="empty">-               </td><td>BIT  3,E         </td><td class="empty">-                </td><td>LD   DE,(&0000)</td></tr>
+<tr><td class="number">5C</td><td>LD   E,H         </td><td>LD   E,IXH      </td><td>BIT  3,H         </td><td class="empty">-                </td><td>MULT DE</td></tr>
+<tr><td class="number">5D</td><td>LD   E,L         </td><td>LD   E,IXL      </td><td>BIT  3,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">5E</td><td>LD   E,(HL)      </td><td>LD   E,(IX+d)   </td><td>BIT  3,(HL)      </td><td>BIT 3,(IY+d)     </td><td>IM   2</td></tr>
+<tr><td class="number">5F</td><td>LD   E,A         </td><td class="empty">-               </td><td>BIT  3,A         </td><td class="empty">-                </td><td>LD   A,R</td></tr>
+<tr><td class="number">60</td><td>LD   H,B         </td><td>LD   IXH,B      </td><td>BIT  4,B         </td><td class="empty">-                </td><td>IN   H,(BC)</td></tr>
+<tr><td class="number">61</td><td>LD   H,C         </td><td>LD   IXH,C      </td><td>BIT  4,C         </td><td class="empty">-                </td><td>OUT  (BC),H</td></tr>
+<tr><td class="number">62</td><td>LD   H,D         </td><td>LD   IXH,D      </td><td>BIT  4,D         </td><td class="empty">-                </td><td>SBC  HL,HL</td></tr>
+<tr><td class="number">63</td><td>LD   H,E         </td><td>LD   IXH,E      </td><td>BIT  4,E         </td><td class="empty">-                </td><td>LD   (&0000),HL</td></tr>
+<tr><td class="number">64</td><td>LD   H,H         </td><td>LD   IXH,IXH    </td><td>BIT  4,H         </td><td class="empty">-                </td><td>TST  A,&00</td></tr>
+<tr><td class="number">65</td><td>LD   H,L         </td><td>LD   IXH,IXL    </td><td>BIT  4,L         </td><td class="empty">-                </td><td>PEA  IX+d</td></tr>
+<tr><td class="number">66</td><td>LD   H,(HL)      </td><td>LD   H,(IX+d)   </td><td>BIT  4,(HL)      </td><td>BIT 4,(IY+d)     </td><td>PEA  IY+d</td></tr>
+<tr><td class="number">67</td><td>LD   H,A         </td><td>LD   IXH,A      </td><td>BIT  4,A         </td><td class="empty">-                </td><td>RRD</td></tr>
+<tr><td class="number">68</td><td>LD   L,B         </td><td>LD   IXL,B      </td><td>BIT  5,B         </td><td class="empty">-                </td><td>IN   L,(BC)</td></tr>
+<tr><td class="number">69</td><td>LD   L,C         </td><td>LD   IXL,C      </td><td>BIT  5,C         </td><td class="empty">-                </td><td>OUT  (BC),L</td></tr>
+<tr><td class="number">6A</td><td>LD   L,D         </td><td>LD   IXL,D      </td><td>BIT  5,D         </td><td class="empty">-                </td><td>ADC  HL,HL</td></tr>
+<tr><td class="number">6B</td><td>LD   L,E         </td><td>LD   IXL,E      </td><td>BIT  5,E         </td><td class="empty">-                </td><td>LD   HL,(&0000)</td></tr>
+<tr><td class="number">6C</td><td>LD   L,H         </td><td>LD   IXL,IXH    </td><td>BIT  5,H         </td><td class="empty">-                </td><td>MULT HL</td></tr>
+<tr><td class="number">6D</td><td>LD   L,L         </td><td>LD   IXL,IXL    </td><td>BIT  5,L         </td><td class="empty">-                </td><td>LD   MB,A</td></tr>
+<tr><td class="number">6E</td><td>LD   L,(HL)      </td><td>LD   L,(IX+d)   </td><td>BIT  5,(HL)      </td><td>BIT 5,(IY+d)     </td><td>LD   A,MB</td></tr>
+<tr><td class="number">6F</td><td>LD   L,A         </td><td>LD   IXL,A      </td><td>BIT  5,A         </td><td class="empty">-                </td><td>RLD</td></tr>
+<tr><td class="number">70</td><td>LD   (HL),B      </td><td>LD   (IX+d),B   </td><td>BIT  6,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">71</td><td>LD   (HL),C      </td><td>LD   (IX+d),C   </td><td>BIT  6,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">72</td><td>LD   (HL),D      </td><td>LD   (IX+d),D   </td><td>BIT  6,D         </td><td class="empty">-                </td><td>SBC  HL,SP</td></tr>
+<tr><td class="number">73</td><td>LD   (HL),E      </td><td>LD   (IX+d),E   </td><td>BIT  6,E         </td><td class="empty">-                </td><td>LD   (&0000),SP</td></tr>
+<tr><td class="number">74</td><td>LD   (HL),H      </td><td>LD   (IX+d),H   </td><td>BIT  6,H         </td><td class="empty">-                </td><td>TSR  (&00)</td></tr>
+<tr><td class="number">75</td><td>LD   (HL),L      </td><td>LD   (IX+d),L   </td><td>BIT  6,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">76</td><td>HALT             </td><td class="empty">-               </td><td>BIT  6,(HL)      </td><td>BIT 6,(IY+d)     </td><td>SLP</td></tr>
+<tr><td class="number">77</td><td>LD   (HL),A      </td><td>LD   (IX+d),A   </td><td>BIT  6,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">78</td><td>LD   A,B         </td><td class="empty">-               </td><td>BIT  7,B         </td><td class="empty">-                </td><td>IN   A,(BC)</td></tr>
+<tr><td class="number">79</td><td>LD   A,C         </td><td class="empty">-               </td><td>BIT  7,C         </td><td class="empty">-                </td><td>OUT  (BC),A</td></tr>
+<tr><td class="number">7A</td><td>LD   A,D         </td><td class="empty">-               </td><td>BIT  7,D         </td><td class="empty">-                </td><td>ADC  HL,SP</td></tr>
+<tr><td class="number">7B</td><td>LD   A,E         </td><td class="empty">-               </td><td>BIT  7,E         </td><td class="empty">-                </td><td>LD   SP,(&0000)</td></tr>
+<tr><td class="number">7C</td><td>LD   A,H         </td><td>LD   A,IXH      </td><td>BIT  7,H         </td><td class="empty">-                </td><td>MULT SP</td></tr>
+<tr><td class="number">7D</td><td>LD   A,L         </td><td>LD   A,IXL      </td><td>BIT  7,L         </td><td class="empty">-                </td><td>STMIX</td></tr>
+<tr><td class="number">7E</td><td>LD   A,(HL)      </td><td>LD   A,(IX+d)   </td><td>BIT  7,(HL)      </td><td>BIT 7,(IY+d)     </td><td>RSMIX</td></tr>
+<tr><td class="number">7F</td><td>LD   A,A         </td><td class="empty">-               </td><td>BIT  7,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">80</td><td>ADD  A,B         </td><td class="empty">-               </td><td>RES  0,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">81</td><td>ADD  A,C         </td><td class="empty">-               </td><td>RES  0,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">82</td><td>ADD  A,D         </td><td class="empty">-               </td><td>RES  0,D         </td><td class="empty">-                </td><td>INIM</td></tr>
+<tr><td class="number">83</td><td>ADD  A,E         </td><td class="empty">-               </td><td>RES  0,E         </td><td class="empty">-                </td><td>OTIM</td></tr>
+<tr><td class="number">84</td><td>ADD  A,H         </td><td>ADD  A,IXH      </td><td>RES  0,H         </td><td class="empty">-                </td><td>INI2</td></tr>
+<tr><td class="number">85</td><td>ADD  A,L         </td><td>ADD  A,IXL      </td><td>RES  0,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">86</td><td>ADD  A,(HL)      </td><td>ADD  A,(IX+d)   </td><td>RES  0,(HL)      </td><td>RES 0,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">87</td><td>ADD  A,A         </td><td class="empty">-               </td><td>RES  0,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">88</td><td>ADC  A,B         </td><td class="empty">-               </td><td>RES  1,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">89</td><td>ADC  A,C         </td><td class="empty">-               </td><td>RES  1,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">8A</td><td>ADC  A,D         </td><td class="empty">-               </td><td>RES  1,D         </td><td class="empty">-                </td><td>INDM</td></tr>
+<tr><td class="number">8B</td><td>ADC  A,E         </td><td class="empty">-               </td><td>RES  1,E         </td><td class="empty">-                </td><td>OTDM</td></tr>
+<tr><td class="number">8C</td><td>ADC  A,H         </td><td>ADC  A,IXH      </td><td>RES  1,H         </td><td class="empty">-                </td><td>IND2</td></tr>
+<tr><td class="number">8D</td><td>ADC  A,L         </td><td>ADC  A,IXL      </td><td>RES  1,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">8E</td><td>ADC  A,(HL)      </td><td>ADC  A,(IX+d)   </td><td>RES  1,(HL)      </td><td>RES 1,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">8F</td><td>ADC  A,A         </td><td class="empty">-               </td><td>RES  1,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">90</td><td>SUB  A,B         </td><td class="empty">-               </td><td>RES  2,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">91</td><td>SUB  A,C         </td><td class="empty">-               </td><td>RES  2,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">92</td><td>SUB  A,D         </td><td class="empty">-               </td><td>RES  2,D         </td><td class="empty">-                </td><td>INIMR</td></tr>
+<tr><td class="number">93</td><td>SUB  A,E         </td><td class="empty">-               </td><td>RES  2,E         </td><td class="empty">-                </td><td>OTIMR</td></tr>
+<tr><td class="number">94</td><td>SUB  A,H         </td><td>SUB  A,IXH      </td><td>RES  2,H         </td><td class="empty">-                </td><td>INI2R</td></tr>
+<tr><td class="number">95</td><td>SUB  A,L         </td><td>SUB  A,IXL      </td><td>RES  2,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">96</td><td>SUB  A,(HL)      </td><td>SUB  A,(IX+d)   </td><td>RES  2,(HL)      </td><td>RES 2,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">97</td><td>SUB  A,A         </td><td class="empty">-               </td><td>RES  2,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">98</td><td>SBC  A,B         </td><td class="empty">-               </td><td>RES  3,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">99</td><td>SBC  A,C         </td><td class="empty">-               </td><td>RES  3,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">9A</td><td>SBC  A,D         </td><td class="empty">-               </td><td>RES  3,D         </td><td class="empty">-                </td><td>INDMR</td></tr>
+<tr><td class="number">9B</td><td>SBC  A,E         </td><td class="empty">-               </td><td>RES  3,E         </td><td class="empty">-                </td><td>OTDMR</td></tr>
+<tr><td class="number">9C</td><td>SBC  A,H         </td><td>SBC  A,IXH      </td><td>RES  3,H         </td><td class="empty">-                </td><td>IND2R</td></tr>
+<tr><td class="number">9D</td><td>SBC  A,L         </td><td>SBC  A,IXL      </td><td>RES  3,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">9E</td><td>SBC  A,(HL)      </td><td>SBC  A,(IX+d)   </td><td>RES  3,(HL)      </td><td>RES 3,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">9F</td><td>SBC  A,A         </td><td class="empty">-               </td><td>RES  3,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">A0</td><td>AND  B           </td><td class="empty">-               </td><td>RES  4,B         </td><td class="empty">-                </td><td>LDI</td></tr>
+<tr><td class="number">A1</td><td>AND  C           </td><td class="empty">-               </td><td>RES  4,C         </td><td class="empty">-                </td><td>CPI</td></tr>
+<tr><td class="number">A2</td><td>AND  D           </td><td class="empty">-               </td><td>RES  4,D         </td><td class="empty">-                </td><td>INI</td></tr>
+<tr><td class="number">A3</td><td>AND  E           </td><td class="empty">-               </td><td>RES  4,E         </td><td class="empty">-                </td><td>OTI</td></tr>
+<tr><td class="number">A4</td><td>AND  H           </td><td>AND  IXH        </td><td>RES  4,H         </td><td class="empty">-                </td><td>OTI2</td></tr>
+<tr><td class="number">A5</td><td>AND  L           </td><td>AND  IXL        </td><td>RES  4,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">A6</td><td>AND  (HL)        </td><td>AND  (IX+d)     </td><td>RES  4,(HL)      </td><td>RES 4,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">A7</td><td>AND  A           </td><td class="empty">-               </td><td>RES  4,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">A8</td><td>XOR  B           </td><td class="empty">-               </td><td>RES  5,B         </td><td class="empty">-                </td><td>LDD</td></tr>
+<tr><td class="number">A9</td><td>XOR  C           </td><td class="empty">-               </td><td>RES  5,C         </td><td class="empty">-                </td><td>CPD</td></tr>
+<tr><td class="number">AA</td><td>XOR  D           </td><td class="empty">-               </td><td>RES  5,D         </td><td class="empty">-                </td><td>IND</td></tr>
+<tr><td class="number">AB</td><td>XOR  E           </td><td class="empty">-               </td><td>RES  5,E         </td><td class="empty">-                </td><td>OTD</td></tr>
+<tr><td class="number">AC</td><td>XOR  H           </td><td>XOR  IXH        </td><td>RES  5,H         </td><td class="empty">-                </td><td>OTD2</td></tr>
+<tr><td class="number">AD</td><td>XOR  L           </td><td>XOR  IXL        </td><td>RES  5,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">AE</td><td>XOR  (HL)        </td><td>XOR  (IX+d)     </td><td>RES  5,(HL)      </td><td>RES 5,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">AF</td><td>XOR  A           </td><td class="empty">-               </td><td>RES  5,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">B0</td><td>OR   B           </td><td class="empty">-               </td><td>RES  6,B         </td><td class="empty">-                </td><td>LDIR</td></tr>
+<tr><td class="number">B1</td><td>OR   C           </td><td class="empty">-               </td><td>RES  6,C         </td><td class="empty">-                </td><td>CPIR</td></tr>
+<tr><td class="number">B2</td><td>OR   D           </td><td class="empty">-               </td><td>RES  6,D         </td><td class="empty">-                </td><td>INIR</td></tr>
+<tr><td class="number">B3</td><td>OR   E           </td><td class="empty">-               </td><td>RES  6,E         </td><td class="empty">-                </td><td>OTIR</td></tr>
+<tr><td class="number">B4</td><td>OR   H           </td><td>OR   IXH        </td><td>RES  6,H         </td><td class="empty">-                </td><td>ORI2R</td></tr>
+<tr><td class="number">B5</td><td>OR   L           </td><td>OR   IXL        </td><td>RES  6,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">B6</td><td>OR   (HL)        </td><td>OR   (IX+d)     </td><td>RES  6,(HL)      </td><td>RES 6,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">B7</td><td>OR   A           </td><td class="empty">-               </td><td>RES  6,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">B8</td><td>CP   B           </td><td class="empty">-               </td><td>RES  7,B         </td><td class="empty">-                </td><td>LDDR</td></tr>
+<tr><td class="number">B9</td><td>CP   C           </td><td class="empty">-               </td><td>RES  7,C         </td><td class="empty">-                </td><td>CPDR</td></tr>
+<tr><td class="number">BA</td><td>CP   D           </td><td class="empty">-               </td><td>RES  7,D         </td><td class="empty">-                </td><td>INDR</td></tr>
+<tr><td class="number">BB</td><td>CP   E           </td><td class="empty">-               </td><td>RES  7,E         </td><td class="empty">-                </td><td>OTDR</td></tr>
+<tr><td class="number">BC</td><td>CP   H           </td><td>CP   IXH        </td><td>RES  7,H         </td><td class="empty">-                </td><td>OTD2R</td></tr>
+<tr><td class="number">BD</td><td>CP   L           </td><td>CP   IXL        </td><td>RES  7,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">BE</td><td>CP   (HL)        </td><td>CP   (IX+d)     </td><td>RES  7,(HL)      </td><td>RES 7,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">BF</td><td>CP   A           </td><td class="empty">-               </td><td>RES  7,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C0</td><td>RET  NZ          </td><td class="empty">-               </td><td>SET  0,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C1</td><td>POP  BC          </td><td class="empty">-               </td><td>SET  0,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C2</td><td>JP   NZ,&0000    </td><td class="empty">-               </td><td>SET  0,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C3</td><td>JP   &0000       </td><td class="empty">-               </td><td>SET  0,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C4</td><td>CALL NZ,&0000    </td><td class="empty">-               </td><td>SET  0,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C5</td><td>PUSH BC          </td><td class="empty">-               </td><td>SET  0,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C6</td><td>ADD  A,&00       </td><td class="empty">-               </td><td>SET  0,(HL)      </td><td>SET 0,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">C7</td><td>RST  &00         </td><td class="empty">-               </td><td>SET  0,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C8</td><td>RET  Z           </td><td class="empty">-               </td><td>SET  1,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">C9</td><td>RET              </td><td class="empty">-               </td><td>SET  1,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">CA</td><td>JP   Z,&0000     </td><td class="empty">-               </td><td>SET  1,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">CB</td><td>**** CB ****     </td><td>**** CB ****    </td><td>SET  1,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">CC</td><td>CALL Z,&0000     </td><td class="empty">-               </td><td>SET  1,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">CD</td><td>CALL &0000       </td><td class="empty">-               </td><td>SET  1,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">CE</td><td>ADC  A,&00       </td><td class="empty">-               </td><td>SET  1,(HL)      </td><td>SET 1,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">CF</td><td>RST  &08         </td><td class="empty">-               </td><td>SET  1,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D0</td><td>RET  NC          </td><td class="empty">-               </td><td>SET  2,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D1</td><td>POP  DE          </td><td class="empty">-               </td><td>SET  2,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D2</td><td>JP   NC,&0000    </td><td class="empty">-               </td><td>SET  2,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D3</td><td>OUT  (&00),A     </td><td class="empty">-               </td><td>SET  2,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D4</td><td>CALL NC,&0000    </td><td class="empty">-               </td><td>SET  2,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D5</td><td>PUSH DE          </td><td class="empty">-               </td><td>SET  2,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D6</td><td>SUB  A,&00       </td><td class="empty">-               </td><td>SET  2,(HL)      </td><td>SET 2,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">D7</td><td>RST  &10         </td><td class="empty">-               </td><td>SET  2,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D8</td><td>RET  C           </td><td class="empty">-               </td><td>SET  3,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">D9</td><td>EXX              </td><td class="empty">-               </td><td>SET  3,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">DA</td><td>JP   C,&0000     </td><td class="empty">-               </td><td>SET  3,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">DB</td><td>IN   A,(&00)     </td><td class="empty">-               </td><td>SET  3,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">DC</td><td>CALL C,&0000     </td><td class="empty">-               </td><td>SET  3,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">DD</td><td>**** DD ****     </td><td class="empty">-               </td><td>SET  3,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">DE</td><td>SBC  A,&00       </td><td class="empty">-               </td><td>SET  3,(HL)      </td><td>SET 3,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">DF</td><td>RST  &18         </td><td class="empty">-               </td><td>SET  3,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E0</td><td>RET  PO          </td><td class="empty">-               </td><td>SET  4,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E1</td><td>POP  HL          </td><td>POP  IX         </td><td>SET  4,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E2</td><td>JP   PO,&0000    </td><td class="empty">-               </td><td>SET  4,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E3</td><td>EX   (SP),HL     </td><td>EX   (SP),IX    </td><td>SET  4,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E4</td><td>CALL PO,&0000    </td><td class="empty">-               </td><td>SET  4,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E5</td><td>PUSH HL          </td><td>PUSH IX         </td><td>SET  4,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E6</td><td>AND  &00         </td><td class="empty">-               </td><td>SET  4,(HL)      </td><td>SET 4,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">E7</td><td>RST  &20         </td><td class="empty">-               </td><td>SET  4,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E8</td><td>RET  PE          </td><td class="empty">-               </td><td>SET  5,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">E9</td><td>JP   (HL)        </td><td>JP   (IX)       </td><td>SET  5,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">EA</td><td>JP   PE,&0000    </td><td class="empty">-               </td><td>SET  5,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">EB</td><td>EX   DE,HL       </td><td class="empty">-               </td><td>SET  5,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">EC</td><td>CALL PE,&0000    </td><td class="empty">-               </td><td>SET  5,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">ED</td><td>**** ED ****     </td><td class="empty">-               </td><td>SET  5,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">EE</td><td>XOR  &00         </td><td class="empty">-               </td><td>SET  5,(HL)      </td><td>SET 5,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">EF</td><td>RST  &28         </td><td class="empty">-               </td><td>SET  5,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F0</td><td>RET  P           </td><td class="empty">-               </td><td>SET  6,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F1</td><td>POP  AF          </td><td class="empty">-               </td><td>SET  6,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F2</td><td>JP   P,&0000     </td><td class="empty">-               </td><td>SET  6,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F3</td><td>DI               </td><td class="empty">-               </td><td>SET  6,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F4</td><td>CALL P,&0000     </td><td class="empty">-               </td><td>SET  6,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F5</td><td>PUSH AF          </td><td class="empty">-               </td><td>SET  6,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F6</td><td>OR   &00         </td><td class="empty">-               </td><td>SET  6,(HL)      </td><td>SET 6,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">F7</td><td>RST  &30         </td><td class="empty">-               </td><td>SET  6,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F8</td><td>RET  M           </td><td class="empty">-               </td><td>SET  7,B         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">F9</td><td>LD   SP,HL       </td><td>LD   SP,IX      </td><td>SET  7,C         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">FA</td><td>JP   M,&0000     </td><td class="empty">-               </td><td>SET  7,D         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">FB</td><td>EI               </td><td class="empty">-               </td><td>SET  7,E         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">FC</td><td>CALL M,&0000     </td><td class="empty">-               </td><td>SET  7,H         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">FD</td><td>**** FD ****     </td><td class="empty">-               </td><td>SET  7,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+<tr><td class="number">FE</td><td>CP   &00         </td><td class="empty">-               </td><td>SET  7,(HL)      </td><td>SET 7,(IY+d)     </td><td class="empty">-</td></tr>
+<tr><td class="number">FF</td><td>RST  &38         </td><td class="empty">-               </td><td>SET  7,A         </td><td class="empty">-                </td><td class="empty">-</td></tr>
+</tbody>
+</table>
+</body>
+</html>
