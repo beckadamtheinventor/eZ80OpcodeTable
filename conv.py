@@ -76,7 +76,7 @@ data = """
 49 LD   C,C         -                BIT  1,C         -                OUT  (BC),C
 4A LD   C,D         -                BIT  1,D         -                ADC  HL,BC
 4B LD   C,E         -                BIT  1,E         -                LD   BC,(&0000)
-4C LD   C,H         LD   C,IXH       BIT  1,H         -                MULT BC
+4C LD   C,H         LD   C,IXH       BIT  1,H         -                MLT  BC
 4D LD   C,L         LD   C,IXL       BIT  1,L         -                RETI
 4E LD   C,(HL)      LD   C,(IX+d)    BIT  1,(HL)      BIT 1,(IY+d)     -
 4F LD   C,A         -                BIT  1,A         -                LD   R,A
@@ -92,7 +92,7 @@ data = """
 59 LD   E,C         -                BIT  3,C         -                OUT  (BC),E
 5A LD   E,D         -                BIT  3,D         -                ADC  HL,DE
 5B LD   E,E         -                BIT  3,E         -                LD   DE,(&0000)
-5C LD   E,H         LD   E,IXH       BIT  3,H         -                MULT DE
+5C LD   E,H         LD   E,IXH       BIT  3,H         -                MLT  DE
 5D LD   E,L         LD   E,IXL       BIT  3,L         -                -
 5E LD   E,(HL)      LD   E,(IX+d)    BIT  3,(HL)      BIT 3,(IY+d)     IM   2
 5F LD   E,A         -                BIT  3,A         -                LD   A,R
@@ -108,7 +108,7 @@ data = """
 69 LD   L,C         LD   IXL,C       BIT  5,C         -                OUT  (BC),L
 6A LD   L,D         LD   IXL,D       BIT  5,D         -                ADC  HL,HL
 6B LD   L,E         LD   IXL,E       BIT  5,E         -                LD   HL,(&0000)
-6C LD   L,H         LD   IXL,IXH     BIT  5,H         -                MULT HL
+6C LD   L,H         LD   IXL,IXH     BIT  5,H         -                MLT  HL
 6D LD   L,L         LD   IXL,IXL     BIT  5,L         -                LD   MB,A
 6E LD   L,(HL)      LD   L,(IX+d)    BIT  5,(HL)      BIT 5,(IY+d)     LD   A,MB
 6F LD   L,A         LD   IXL,A       BIT  5,A         -                RLD
@@ -124,7 +124,7 @@ data = """
 79 LD   A,C         -                BIT  7,C         -                OUT  (BC),A
 7A LD   A,D         -                BIT  7,D         -                ADC  HL,SP
 7B LD   A,E         -                BIT  7,E         -                LD   SP,(&0000)
-7C LD   A,H         LD   A,IXH       BIT  7,H         -                MULT SP
+7C LD   A,H         LD   A,IXH       BIT  7,H         -                MLT  SP
 7D LD   A,L         LD   A,IXL       BIT  7,L         -                STMIX
 7E LD   A,(HL)      LD   A,(IX+d)    BIT  7,(HL)      BIT 7,(IY+d)     RSMIX
 7F LD   A,A         -                BIT  7,A         -                -
@@ -259,6 +259,32 @@ FF RST  &38         -                SET  7,A         -                -
 """
 
 HEX="0123456789ABCDEF"
+with open("table00.html","w") as f:
+	N=0
+	tbl = {}
+	for line in data.splitlines():
+		if len(line):
+			tbl[N] = "<td>"+line[3:20]+"</td>\n".replace("<td>-","<td class=\"empty\">-")
+			N+=1
+	f.write("""
+<html><head>
+<title>eZ80 opcode map</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<table>\n<thead>\n<thead>\n<tr><th>..</th>
+""")
+	for J in range(16):
+		f.write("<th class=\"number\">."+HEX[J]+"</th>")
+	for J in range(0,256,16):
+		f.write("<tr><th class=\"number\">"+HEX[J//16]+".</th>\n\t")
+		for N in range(J,J+16):
+			f.write(tbl[N])
+		f.write("</tr>\n")
+	f.write("""
+</tbody>\n</table>
+</body></head>
+""")
+
 with open("table.html","w") as f:
 	f.write("<table>\n<thead>\n<tr><th>0xnn</th><th>nn</th><th>0xDDnndd</th><th>0xCBnn</th><th>0xFDCBddnn</th><th>0xEDnn</th></tr>\n</thead>\n<tbody>\n")
 	N=0

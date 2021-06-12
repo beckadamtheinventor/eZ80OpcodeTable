@@ -9,7 +9,7 @@ td.empty {
 	text-align: center;
 	color: #A00;
 }
-td.number {
+td, th .number {
 	width: 1em;
 	color: #900;
 	text-align: center;

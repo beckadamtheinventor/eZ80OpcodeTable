@@ -1,0 +1,301 @@
+
+<html><head>
+<title>eZ80 opcode map</title>
+<link rel="stylesheet" href="style.css">
+</head><body>
+<table>
+<thead>
+<thead>
+<tr><th>..</th>
+<th class="number">.0</th><th class="number">.1</th><th class="number">.2</th><th class="number">.3</th><th class="number">.4</th><th class="number">.5</th><th class="number">.6</th><th class="number">.7</th><th class="number">.8</th><th class="number">.9</th><th class="number">.A</th><th class="number">.B</th><th class="number">.C</th><th class="number">.D</th><th class="number">.E</th><th class="number">.F</th><tr><th class="number">0.</th>
+	<td>NOP              </td>
+<td>LD   BC,&0000    </td>
+<td>LD   (BC),A      </td>
+<td>INC  BC          </td>
+<td>INC  B           </td>
+<td>DEC  B           </td>
+<td>LD   B,&00       </td>
+<td>RLCA             </td>
+<td>EX   AF,AF'      </td>
+<td>ADD  HL,BC       </td>
+<td>LD   A,(BC)      </td>
+<td>DEC  BC          </td>
+<td>INC  C           </td>
+<td>DEC  C           </td>
+<td>LD   C,&00       </td>
+<td>RRCA             </td>
+</tr>
+<tr><th class="number">1.</th>
+	<td>DJNZ dist        </td>
+<td>LD   DE,&0000    </td>
+<td>LD   (DE),A      </td>
+<td>INC  DE          </td>
+<td>INC  D           </td>
+<td>DEC  D           </td>
+<td>LD   D,&00       </td>
+<td>RLA              </td>
+<td>JR   dist        </td>
+<td>ADD  HL,DE       </td>
+<td>LD   A,(DE)      </td>
+<td>DEC  DE          </td>
+<td>INC  E           </td>
+<td>DEC  E           </td>
+<td>LD   E,&00       </td>
+<td>RRA              </td>
+</tr>
+<tr><th class="number">2.</th>
+	<td>JR   NZ,dist     </td>
+<td>LD   HL,&0000    </td>
+<td>LD   (&0000),HL  </td>
+<td>INC  HL          </td>
+<td>INC  H           </td>
+<td>DEC  H           </td>
+<td>LD   H,&00       </td>
+<td>DAA              </td>
+<td>JR   Z,dist      </td>
+<td>ADD  HL,HL       </td>
+<td>LD   HL,(&0000)  </td>
+<td>DEC  HL          </td>
+<td>INC  L           </td>
+<td>DEC  L           </td>
+<td>LD   L,&00       </td>
+<td>CPL              </td>
+</tr>
+<tr><th class="number">3.</th>
+	<td>JR   NC,dist     </td>
+<td>LD   SP,&0000    </td>
+<td>LD   (&0000),A   </td>
+<td>INC  SP          </td>
+<td>INC  (HL)        </td>
+<td>DEC  (HL)        </td>
+<td>LD   (HL),&00    </td>
+<td>SCF              </td>
+<td>JR   C,dist      </td>
+<td>ADD  HL,SP       </td>
+<td>LD   A,(&0000)   </td>
+<td>DEC  SP          </td>
+<td>INC  A           </td>
+<td>DEC  A           </td>
+<td>LD   A,&00       </td>
+<td>CCF              </td>
+</tr>
+<tr><th class="number">4.</th>
+	<td>LD   B,B         </td>
+<td>LD   B,C         </td>
+<td>LD   B,D         </td>
+<td>LD   B,E         </td>
+<td>LD   B,H         </td>
+<td>LD   B,L         </td>
+<td>LD   B,(HL)      </td>
+<td>LD   B,A         </td>
+<td>LD   C,B         </td>
+<td>LD   C,C         </td>
+<td>LD   C,D         </td>
+<td>LD   C,E         </td>
+<td>LD   C,H         </td>
+<td>LD   C,L         </td>
+<td>LD   C,(HL)      </td>
+<td>LD   C,A         </td>
+</tr>
+<tr><th class="number">5.</th>
+	<td>LD   D,B         </td>
+<td>LD   D,C         </td>
+<td>LD   D,D         </td>
+<td>LD   D,E         </td>
+<td>LD   D,H         </td>
+<td>LD   D,L         </td>
+<td>LD   D,(HL)      </td>
+<td>LD   D,A         </td>
+<td>LD   E,B         </td>
+<td>LD   E,C         </td>
+<td>LD   E,D         </td>
+<td>LD   E,E         </td>
+<td>LD   E,H         </td>
+<td>LD   E,L         </td>
+<td>LD   E,(HL)      </td>
+<td>LD   E,A         </td>
+</tr>
+<tr><th class="number">6.</th>
+	<td>LD   H,B         </td>
+<td>LD   H,C         </td>
+<td>LD   H,D         </td>
+<td>LD   H,E         </td>
+<td>LD   H,H         </td>
+<td>LD   H,L         </td>
+<td>LD   H,(HL)      </td>
+<td>LD   H,A         </td>
+<td>LD   L,B         </td>
+<td>LD   L,C         </td>
+<td>LD   L,D         </td>
+<td>LD   L,E         </td>
+<td>LD   L,H         </td>
+<td>LD   L,L         </td>
+<td>LD   L,(HL)      </td>
+<td>LD   L,A         </td>
+</tr>
+<tr><th class="number">7.</th>
+	<td>LD   (HL),B      </td>
+<td>LD   (HL),C      </td>
+<td>LD   (HL),D      </td>
+<td>LD   (HL),E      </td>
+<td>LD   (HL),H      </td>
+<td>LD   (HL),L      </td>
+<td>HALT             </td>
+<td>LD   (HL),A      </td>
+<td>LD   A,B         </td>
+<td>LD   A,C         </td>
+<td>LD   A,D         </td>
+<td>LD   A,E         </td>
+<td>LD   A,H         </td>
+<td>LD   A,L         </td>
+<td>LD   A,(HL)      </td>
+<td>LD   A,A         </td>
+</tr>
+<tr><th class="number">8.</th>
+	<td>ADD  A,B         </td>
+<td>ADD  A,C         </td>
+<td>ADD  A,D         </td>
+<td>ADD  A,E         </td>
+<td>ADD  A,H         </td>
+<td>ADD  A,L         </td>
+<td>ADD  A,(HL)      </td>
+<td>ADD  A,A         </td>
+<td>ADC  A,B         </td>
+<td>ADC  A,C         </td>
+<td>ADC  A,D         </td>
+<td>ADC  A,E         </td>
+<td>ADC  A,H         </td>
+<td>ADC  A,L         </td>
+<td>ADC  A,(HL)      </td>
+<td>ADC  A,A         </td>
+</tr>
+<tr><th class="number">9.</th>
+	<td>SUB  A,B         </td>
+<td>SUB  A,C         </td>
+<td>SUB  A,D         </td>
+<td>SUB  A,E         </td>
+<td>SUB  A,H         </td>
+<td>SUB  A,L         </td>
+<td>SUB  A,(HL)      </td>
+<td>SUB  A,A         </td>
+<td>SBC  A,B         </td>
+<td>SBC  A,C         </td>
+<td>SBC  A,D         </td>
+<td>SBC  A,E         </td>
+<td>SBC  A,H         </td>
+<td>SBC  A,L         </td>
+<td>SBC  A,(HL)      </td>
+<td>SBC  A,A         </td>
+</tr>
+<tr><th class="number">A.</th>
+	<td>AND  B           </td>
+<td>AND  C           </td>
+<td>AND  D           </td>
+<td>AND  E           </td>
+<td>AND  H           </td>
+<td>AND  L           </td>
+<td>AND  (HL)        </td>
+<td>AND  A           </td>
+<td>XOR  B           </td>
+<td>XOR  C           </td>
+<td>XOR  D           </td>
+<td>XOR  E           </td>
+<td>XOR  H           </td>
+<td>XOR  L           </td>
+<td>XOR  (HL)        </td>
+<td>XOR  A           </td>
+</tr>
+<tr><th class="number">B.</th>
+	<td>OR   B           </td>
+<td>OR   C           </td>
+<td>OR   D           </td>
+<td>OR   E           </td>
+<td>OR   H           </td>
+<td>OR   L           </td>
+<td>OR   (HL)        </td>
+<td>OR   A           </td>
+<td>CP   B           </td>
+<td>CP   C           </td>
+<td>CP   D           </td>
+<td>CP   E           </td>
+<td>CP   H           </td>
+<td>CP   L           </td>
+<td>CP   (HL)        </td>
+<td>CP   A           </td>
+</tr>
+<tr><th class="number">C.</th>
+	<td>RET  NZ          </td>
+<td>POP  BC          </td>
+<td>JP   NZ,&0000    </td>
+<td>JP   &0000       </td>
+<td>CALL NZ,&0000    </td>
+<td>PUSH BC          </td>
+<td>ADD  A,&00       </td>
+<td>RST  &00         </td>
+<td>RET  Z           </td>
+<td>RET              </td>
+<td>JP   Z,&0000     </td>
+<td>**** CB ****     </td>
+<td>CALL Z,&0000     </td>
+<td>CALL &0000       </td>
+<td>ADC  A,&00       </td>
+<td>RST  &08         </td>
+</tr>
+<tr><th class="number">D.</th>
+	<td>RET  NC          </td>
+<td>POP  DE          </td>
+<td>JP   NC,&0000    </td>
+<td>OUT  (&00),A     </td>
+<td>CALL NC,&0000    </td>
+<td>PUSH DE          </td>
+<td>SUB  A,&00       </td>
+<td>RST  &10         </td>
+<td>RET  C           </td>
+<td>EXX              </td>
+<td>JP   C,&0000     </td>
+<td>IN   A,(&00)     </td>
+<td>CALL C,&0000     </td>
+<td>**** DD ****     </td>
+<td>SBC  A,&00       </td>
+<td>RST  &18         </td>
+</tr>
+<tr><th class="number">E.</th>
+	<td>RET  PO          </td>
+<td>POP  HL          </td>
+<td>JP   PO,&0000    </td>
+<td>EX   (SP),HL     </td>
+<td>CALL PO,&0000    </td>
+<td>PUSH HL          </td>
+<td>AND  &00         </td>
+<td>RST  &20         </td>
+<td>RET  PE          </td>
+<td>JP   (HL)        </td>
+<td>JP   PE,&0000    </td>
+<td>EX   DE,HL       </td>
+<td>CALL PE,&0000    </td>
+<td>**** ED ****     </td>
+<td>XOR  &00         </td>
+<td>RST  &28         </td>
+</tr>
+<tr><th class="number">F.</th>
+	<td>RET  P           </td>
+<td>POP  AF          </td>
+<td>JP   P,&0000     </td>
+<td>DI               </td>
+<td>CALL P,&0000     </td>
+<td>PUSH AF          </td>
+<td>OR   &00         </td>
+<td>RST  &30         </td>
+<td>RET  M           </td>
+<td>LD   SP,HL       </td>
+<td>JP   M,&0000     </td>
+<td>EI               </td>
+<td>CALL M,&0000     </td>
+<td>**** FD ****     </td>
+<td>CP   &00         </td>
+<td>RST  &38         </td>
+</tr>
+
+</tbody>
+</table>
+</body></head>
