@@ -116,7 +116,7 @@ data = """
 71 LD   (HL),C      LD   (IX+d),C    BIT  6,C         -                -
 72 LD   (HL),D      LD   (IX+d),D    BIT  6,D         -                SBC  HL,SP
 73 LD   (HL),E      LD   (IX+d),E    BIT  6,E         -                LD   (&0000),SP
-74 LD   (HL),H      LD   (IX+d),H    BIT  6,H         -                TSR  (&00)
+74 LD   (HL),H      LD   (IX+d),H    BIT  6,H         -                TSTIO &00
 75 LD   (HL),L      LD   (IX+d),L    BIT  6,L         -                -
 76 HALT             -                BIT  6,(HL)      BIT 6,(IY+d)     SLP
 77 LD   (HL),A      LD   (IX+d),A    BIT  6,A         -                -
