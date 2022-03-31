@@ -76,7 +76,7 @@ In column 0xFDCBddnn, you may substitute 0xDDCBddnn for IX instead of IY.</p>
 <tr><td class="number">3D</td><td>DEC  A           </td><td class="empty">-               </td><td>SRL  L           </td><td class="empty">-                </td><td class="empty">-</td></tr>
 <tr><td class="number">3E</td><td>LD   A,&00       </td><td>LD   (IX+d),IY  </td><td>SRL  (HL)        </td><td>SRL (IY+d)       </td><td>LD  (HL),IY</td></tr>
 <tr><td class="number">3F</td><td>CCF              </td><td>LD   (IX+d),IX  </td><td>SRL  A           </td><td class="empty">-                </td><td>LD  (HL),IX</td></tr>
-<tr><td class="number">40</td><td>LD   B,B         </td><td class="empty">-               </td><td>BIT  0,B         </td><td class="empty">-                </td><td>IN   B,(BC)</td></tr>
+<tr><td class="number">40</td><td>.SIS suffix      </td><td class="empty">-               </td><td>BIT  0,B         </td><td class="empty">-                </td><td>IN   B,(BC)</td></tr>
 <tr><td class="number">41</td><td>LD   B,C         </td><td class="empty">-               </td><td>BIT  0,C         </td><td class="empty">-                </td><td>OUT  (BC),B</td></tr>
 <tr><td class="number">42</td><td>LD   B,D         </td><td class="empty">-               </td><td>BIT  0,D         </td><td class="empty">-                </td><td>SBC  HL,BC</td></tr>
 <tr><td class="number">43</td><td>LD   B,E         </td><td class="empty">-               </td><td>BIT  0,E         </td><td class="empty">-                </td><td>LD   (&0000),BC</td></tr>
@@ -85,7 +85,7 @@ In column 0xFDCBddnn, you may substitute 0xDDCBddnn for IX instead of IY.</p>
 <tr><td class="number">46</td><td>LD   B,(HL)      </td><td>LD   B,(IX+d)   </td><td>BIT  0,(HL)      </td><td>BIT 0,(IY+d)     </td><td>IM   0</td></tr>
 <tr><td class="number">47</td><td>LD   B,A         </td><td class="empty">-               </td><td>BIT  0,A         </td><td class="empty">-                </td><td>LD   I,A</td></tr>
 <tr><td class="number">48</td><td>LD   C,B         </td><td class="empty">-               </td><td>BIT  1,B         </td><td class="empty">-                </td><td>IN   C,(BC)</td></tr>
-<tr><td class="number">49</td><td>LD   C,C         </td><td class="empty">-               </td><td>BIT  1,C         </td><td class="empty">-                </td><td>OUT  (BC),C</td></tr>
+<tr><td class="number">49</td><td>.LIS suffix      </td><td class="empty">-               </td><td>BIT  1,C         </td><td class="empty">-                </td><td>OUT  (BC),C</td></tr>
 <tr><td class="number">4A</td><td>LD   C,D         </td><td class="empty">-               </td><td>BIT  1,D         </td><td class="empty">-                </td><td>ADC  HL,BC</td></tr>
 <tr><td class="number">4B</td><td>LD   C,E         </td><td class="empty">-               </td><td>BIT  1,E         </td><td class="empty">-                </td><td>LD   BC,(&0000)</td></tr>
 <tr><td class="number">4C</td><td>LD   C,H         </td><td>LD   C,IXH      </td><td>BIT  1,H         </td><td class="empty">-                </td><td>MLT  BC</td></tr>
@@ -94,7 +94,7 @@ In column 0xFDCBddnn, you may substitute 0xDDCBddnn for IX instead of IY.</p>
 <tr><td class="number">4F</td><td>LD   C,A         </td><td class="empty">-               </td><td>BIT  1,A         </td><td class="empty">-                </td><td>LD   R,A</td></tr>
 <tr><td class="number">50</td><td>LD   D,B         </td><td class="empty">-               </td><td>BIT  2,B         </td><td class="empty">-                </td><td>IN   D,(BC)</td></tr>
 <tr><td class="number">51</td><td>LD   D,C         </td><td class="empty">-               </td><td>BIT  2,C         </td><td class="empty">-                </td><td>OUT  (BC),D</td></tr>
-<tr><td class="number">52</td><td>LD   D,D         </td><td class="empty">-               </td><td>BIT  2,D         </td><td class="empty">-                </td><td>SBC  HL,DE</td></tr>
+<tr><td class="number">52</td><td>.SIL suffix      </td><td class="empty">-               </td><td>BIT  2,D         </td><td class="empty">-                </td><td>SBC  HL,DE</td></tr>
 <tr><td class="number">53</td><td>LD   D,E         </td><td class="empty">-               </td><td>BIT  2,E         </td><td class="empty">-                </td><td>LD   (&0000),DE</td></tr>
 <tr><td class="number">54</td><td>LD   D,H         </td><td>LD   D,IXH      </td><td>BIT  2,H         </td><td class="empty">-                </td><td>LEA  IX,IY+d</td></tr>
 <tr><td class="number">55</td><td>LD   D,L         </td><td>LD   D,IXL      </td><td>BIT  2,L         </td><td class="empty">-                </td><td>LEA  IY,IX+d</td></tr>
@@ -103,7 +103,7 @@ In column 0xFDCBddnn, you may substitute 0xDDCBddnn for IX instead of IY.</p>
 <tr><td class="number">58</td><td>LD   E,B         </td><td class="empty">-               </td><td>BIT  3,B         </td><td class="empty">-                </td><td>IN   E,(BC)</td></tr>
 <tr><td class="number">59</td><td>LD   E,C         </td><td class="empty">-               </td><td>BIT  3,C         </td><td class="empty">-                </td><td>OUT  (BC),E</td></tr>
 <tr><td class="number">5A</td><td>LD   E,D         </td><td class="empty">-               </td><td>BIT  3,D         </td><td class="empty">-                </td><td>ADC  HL,DE</td></tr>
-<tr><td class="number">5B</td><td>LD   E,E         </td><td class="empty">-               </td><td>BIT  3,E         </td><td class="empty">-                </td><td>LD   DE,(&0000)</td></tr>
+<tr><td class="number">5B</td><td>.LIL suffix      </td><td class="empty">-               </td><td>BIT  3,E         </td><td class="empty">-                </td><td>LD   DE,(&0000)</td></tr>
 <tr><td class="number">5C</td><td>LD   E,H         </td><td>LD   E,IXH      </td><td>BIT  3,H         </td><td class="empty">-                </td><td>MLT  DE</td></tr>
 <tr><td class="number">5D</td><td>LD   E,L         </td><td>LD   E,IXL      </td><td>BIT  3,L         </td><td class="empty">-                </td><td class="empty">-</td></tr>
 <tr><td class="number">5E</td><td>LD   E,(HL)      </td><td>LD   E,(IX+d)   </td><td>BIT  3,(HL)      </td><td>BIT 3,(IY+d)     </td><td>IM   2</td></tr>
