@@ -282,6 +282,8 @@ with open("table00.html","w") as f:
 		f.write("</tr>\n")
 	f.write("""
 </tbody>\n</table>
+<p><a href="index.html">Back to Index</a><br>
+</p>
 </body></head>
 """)
 
