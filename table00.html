@@ -6,8 +6,8 @@
 <table>
 <thead>
 <thead>
-<tr><th>..</th>
-<th class="number">.0</th><th class="number">.1</th><th class="number">.2</th><th class="number">.3</th><th class="number">.4</th><th class="number">.5</th><th class="number">.6</th><th class="number">.7</th><th class="number">.8</th><th class="number">.9</th><th class="number">.A</th><th class="number">.B</th><th class="number">.C</th><th class="number">.D</th><th class="number">.E</th><th class="number">.F</th><tr><th class="number">0.</th>
+<tr><th>__</th>
+<th class="number">_0</th><th class="number">_1</th><th class="number">_2</th><th class="number">_3</th><th class="number">_4</th><th class="number">_5</th><th class="number">_6</th><th class="number">_7</th><th class="number">_8</th><th class="number">_9</th><th class="number">_A</th><th class="number">_B</th><th class="number">_C</th><th class="number">_D</th><th class="number">_E</th><th class="number">_F</th><tr><th class="number">0_</th>
 	<td>NOP              </td>
 <td>LD   BC,&0000    </td>
 <td>LD   (BC),A      </td>
@@ -25,7 +25,7 @@
 <td>LD   C,&00       </td>
 <td>RRCA             </td>
 </tr>
-<tr><th class="number">1.</th>
+<tr><th class="number">1_</th>
 	<td>DJNZ dist        </td>
 <td>LD   DE,&0000    </td>
 <td>LD   (DE),A      </td>
@@ -43,7 +43,7 @@
 <td>LD   E,&00       </td>
 <td>RRA              </td>
 </tr>
-<tr><th class="number">2.</th>
+<tr><th class="number">2_</th>
 	<td>JR   NZ,dist     </td>
 <td>LD   HL,&0000    </td>
 <td>LD   (&0000),HL  </td>
@@ -61,7 +61,7 @@
 <td>LD   L,&00       </td>
 <td>CPL              </td>
 </tr>
-<tr><th class="number">3.</th>
+<tr><th class="number">3_</th>
 	<td>JR   NC,dist     </td>
 <td>LD   SP,&0000    </td>
 <td>LD   (&0000),A   </td>
@@ -79,7 +79,7 @@
 <td>LD   A,&00       </td>
 <td>CCF              </td>
 </tr>
-<tr><th class="number">4.</th>
+<tr><th class="number">4_</th>
 	<td>.SIS suffix      </td>
 <td>LD   B,C         </td>
 <td>LD   B,D         </td>
@@ -97,7 +97,7 @@
 <td>LD   C,(HL)      </td>
 <td>LD   C,A         </td>
 </tr>
-<tr><th class="number">5.</th>
+<tr><th class="number">5_</th>
 	<td>LD   D,B         </td>
 <td>LD   D,C         </td>
 <td>.SIL suffix      </td>
@@ -115,7 +115,7 @@
 <td>LD   E,(HL)      </td>
 <td>LD   E,A         </td>
 </tr>
-<tr><th class="number">6.</th>
+<tr><th class="number">6_</th>
 	<td>LD   H,B         </td>
 <td>LD   H,C         </td>
 <td>LD   H,D         </td>
@@ -133,7 +133,7 @@
 <td>LD   L,(HL)      </td>
 <td>LD   L,A         </td>
 </tr>
-<tr><th class="number">7.</th>
+<tr><th class="number">7_</th>
 	<td>LD   (HL),B      </td>
 <td>LD   (HL),C      </td>
 <td>LD   (HL),D      </td>
@@ -151,7 +151,7 @@
 <td>LD   A,(HL)      </td>
 <td>LD   A,A         </td>
 </tr>
-<tr><th class="number">8.</th>
+<tr><th class="number">8_</th>
 	<td>ADD  A,B         </td>
 <td>ADD  A,C         </td>
 <td>ADD  A,D         </td>
@@ -169,7 +169,7 @@
 <td>ADC  A,(HL)      </td>
 <td>ADC  A,A         </td>
 </tr>
-<tr><th class="number">9.</th>
+<tr><th class="number">9_</th>
 	<td>SUB  A,B         </td>
 <td>SUB  A,C         </td>
 <td>SUB  A,D         </td>
@@ -187,7 +187,7 @@
 <td>SBC  A,(HL)      </td>
 <td>SBC  A,A         </td>
 </tr>
-<tr><th class="number">A.</th>
+<tr><th class="number">A_</th>
 	<td>AND  B           </td>
 <td>AND  C           </td>
 <td>AND  D           </td>
@@ -205,7 +205,7 @@
 <td>XOR  (HL)        </td>
 <td>XOR  A           </td>
 </tr>
-<tr><th class="number">B.</th>
+<tr><th class="number">B_</th>
 	<td>OR   B           </td>
 <td>OR   C           </td>
 <td>OR   D           </td>
@@ -223,7 +223,7 @@
 <td>CP   (HL)        </td>
 <td>CP   A           </td>
 </tr>
-<tr><th class="number">C.</th>
+<tr><th class="number">C_</th>
 	<td>RET  NZ          </td>
 <td>POP  BC          </td>
 <td>JP   NZ,&0000    </td>
@@ -241,7 +241,7 @@
 <td>ADC  A,&00       </td>
 <td>RST  &08         </td>
 </tr>
-<tr><th class="number">D.</th>
+<tr><th class="number">D_</th>
 	<td>RET  NC          </td>
 <td>POP  DE          </td>
 <td>JP   NC,&0000    </td>
@@ -259,7 +259,7 @@
 <td>SBC  A,&00       </td>
 <td>RST  &18         </td>
 </tr>
-<tr><th class="number">E.</th>
+<tr><th class="number">E_</th>
 	<td>RET  PO          </td>
 <td>POP  HL          </td>
 <td>JP   PO,&0000    </td>
@@ -277,7 +277,7 @@
 <td>XOR  &00         </td>
 <td>RST  &28         </td>
 </tr>
-<tr><th class="number">F.</th>
+<tr><th class="number">F_</th>
 	<td>RET  P           </td>
 <td>POP  AF          </td>
 <td>JP   P,&0000     </td>
