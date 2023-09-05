@@ -264,24 +264,26 @@ with open("table00.html","w") as f:
 	tbl = {}
 	for line in data.splitlines():
 		if len(line):
-			tbl[N] = "<td>"+line[3:20]+"</td>\n".replace("<td>-","<td class=\"empty\">-")
+			tbl[N] = "<td>"+line[3:20]+"</td>\n".replace("<td>__","<td class=\"empty\">__")
 			N+=1
 	f.write("""
 <html><head>
 <title>eZ80 opcode map</title>
 <link rel="stylesheet" href="style.css">
 </head><body>
-<table>\n<thead>\n<thead>\n<tr><th>..</th>
+<table>\n<thead>\n<thead>\n<tr><th>__</th>
 """)
 	for J in range(16):
-		f.write("<th class=\"number\">."+HEX[J]+"</th>")
+		f.write("<th class=\"number\">_"+HEX[J]+"</th>")
 	for J in range(0,256,16):
-		f.write("<tr><th class=\"number\">"+HEX[J//16]+".</th>\n\t")
+		f.write("<tr><th class=\"number\">"+HEX[J//16]+"_</th>\n\t")
 		for N in range(J,J+16):
 			f.write(tbl[N])
 		f.write("</tr>\n")
 	f.write("""
 </tbody>\n</table>
+<p><a href="index.html">Back to Index</a><br>
+</p>
 </body></head>
 """)
 
