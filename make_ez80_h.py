@@ -24,7 +24,7 @@ data = """
 15 DEC  D           -                RL   L           -                -
 16 LD   D,&00       -                RL   (HL)        RL  (IY+d)       -
 17 RLA              LD   DE,(IX+d)   RL   A           -                LD   DE,(HL)
-18 JR   +d          -                RR   B           -                IN0  E,(&00)
+18 JR   &00         -                RR   B           -                IN0  E,(&00)
 19 ADD  HL,DE       ADD  IX,DE       RR   C           -                OUT0 (&00),E
 1A LD   A,(DE)      -                RR   D           -                -
 1B DEC  DE          -                RR   E           -                -
@@ -32,7 +32,7 @@ data = """
 1D DEC  E           -                RR   L           -                -
 1E LD   E,&00       -                RR   (HL)        RR  (IY+d)       -
 1F RRA              LD   (IX+d),DE   RR   A           -                LD   (HL),DE
-20 JR   NZ,+d       -                SLA  B           -                IN0  H,(&00)
+20 JR   NZ,&00      -                SLA  B           -                IN0  H,(&00)
 21 LD   HL,&0000    LD   IX,&0000    SLA  C           -                OUT0 (&00),H
 22 LD   (&0000),HL  LD   (&0000),IX  SLA  D           -                LEA  HL,IX+d
 23 INC  HL          INC  IX          SLA  E           -                LEA  HL,IY+d
@@ -40,7 +40,7 @@ data = """
 25 DEC  H           DEC  IXH         SLA  L           -                -
 26 LD   H,&00       LD   IXH,&00     SLA  (HL)        SLA (IY+d)       -
 27 DAA              LD   HL,(IX+d)   SLA  A           -                LD   HL,(HL)
-28 JR   Z,+d        -                SRA  B           -                IN0  L,(&00)
+28 JR   Z,&00       -                SRA  B           -                IN0  L,(&00)
 29 ADD  HL,HL       ADD  IX,IX       SRA  C           -                OUT0 (&00),L
 2A LD   HL,(&0000)  LD   IX,(&0000)  SRA  D           -                -
 2B DEC  HL          DEC  IX          SRA  E           -                -
@@ -48,7 +48,7 @@ data = """
 2D DEC  L           DEC  IXL         SRA  L           -                -
 2E LD   L,&00       LD   IXL,&00     SRA  (HL)        SRA (IY+d)       -
 2F CPL              LD   (IX+d),HL   SRA  A           -                LD   (HL),HL
-30 JR   NC,+d       -                -                -                -
+30 JR   NC,&00      -                -                -                -
 31 LD   SP,&0000    LD   IY,(IX+d)   -                -                -
 32 LD   (&0000),A   -                -                -                LEA  IX,IX+d
 33 INC  SP          -                -                -                LEA  IY,IY+d
@@ -56,7 +56,7 @@ data = """
 35 DEC  (HL)        DEC  (IX+d)      -                -                -
 36 LD   (HL),&00    LD   (IX+d),&00  -                -                LD   IY,(HL)
 37 SCF              LD   IX,(IX+d)   -                -                LD   IX,(HL)
-38 JR   C,+d        -                SRL  B           -                IN0  A,(&00)
+38 JR   C,&00       -                SRL  B           -                IN0  A,(&00)
 39 ADD  HL,SP       ADD  IX,SP       SRL  C           -                OUT0 (&00),A
 3A LD   A,(&0000)   -                SRL  D           -                -
 3B DEC  SP          -                SRL  E           -                -
