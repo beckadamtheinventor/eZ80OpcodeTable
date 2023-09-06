@@ -65,9 +65,9 @@
 #define O_RRCA 0x0F
 #define L_RRCA 1
 #define EMIT_RRCA(p) EMIT_8(p, O_RRCA)
-#define O_DJNZ_DIST 0x10
-#define L_DJNZ_DIST 1
-#define EMIT_DJNZ_DIST(p) EMIT_8(p, O_DJNZ_DIST)
+#define O_DJNZ__DD 0x10
+#define L_DJNZ__DD 1
+#define EMIT_DJNZ__DD(p,v) EMIT_8_8(p, O_DJNZ__DD, v)
 #define O_LD_DE_IMM 0x11
 #define L_LD_DE_IMM 1
 #define EMIT_LD_DE_IMM(p,v) EMIT_8_24(p, O_LD_DE_IMM, v)
@@ -89,9 +89,9 @@
 #define O_RLA 0x17
 #define L_RLA 1
 #define EMIT_RLA(p) EMIT_8(p, O_RLA)
-#define O_JR_DIST 0x18
-#define L_JR_DIST 1
-#define EMIT_JR_DIST(p) EMIT_8(p, O_JR_DIST)
+#define O_JR__DD 0x18
+#define L_JR__DD 1
+#define EMIT_JR__DD(p,v) EMIT_8_8(p, O_JR__DD, v)
 #define O_ADD_HL_DE 0x19
 #define L_ADD_HL_DE 1
 #define EMIT_ADD_HL_DE(p) EMIT_8(p, O_ADD_HL_DE)
@@ -113,9 +113,9 @@
 #define O_RRA 0x1F
 #define L_RRA 1
 #define EMIT_RRA(p) EMIT_8(p, O_RRA)
-#define O_JR_NZ_DIST 0x20
-#define L_JR_NZ_DIST 1
-#define EMIT_JR_NZ_DIST(p) EMIT_8(p, O_JR_NZ_DIST)
+#define O_JR_NZ__DD 0x20
+#define L_JR_NZ__DD 1
+#define EMIT_JR_NZ__DD(p,v) EMIT_8_8(p, O_JR_NZ__DD, v)
 #define O_LD_HL_IMM 0x21
 #define L_LD_HL_IMM 1
 #define EMIT_LD_HL_IMM(p,v) EMIT_8_24(p, O_LD_HL_IMM, v)
@@ -137,9 +137,9 @@
 #define O_DAA 0x27
 #define L_DAA 1
 #define EMIT_DAA(p) EMIT_8(p, O_DAA)
-#define O_JR_Z_DIST 0x28
-#define L_JR_Z_DIST 1
-#define EMIT_JR_Z_DIST(p) EMIT_8(p, O_JR_Z_DIST)
+#define O_JR_Z__DD 0x28
+#define L_JR_Z__DD 1
+#define EMIT_JR_Z__DD(p,v) EMIT_8_8(p, O_JR_Z__DD, v)
 #define O_ADD_HL_HL 0x29
 #define L_ADD_HL_HL 1
 #define EMIT_ADD_HL_HL(p) EMIT_8(p, O_ADD_HL_HL)
@@ -161,9 +161,9 @@
 #define O_CPL 0x2F
 #define L_CPL 1
 #define EMIT_CPL(p) EMIT_8(p, O_CPL)
-#define O_JR_NC_DIST 0x30
-#define L_JR_NC_DIST 1
-#define EMIT_JR_NC_DIST(p) EMIT_8(p, O_JR_NC_DIST)
+#define O_JR_NC__DD 0x30
+#define L_JR_NC__DD 1
+#define EMIT_JR_NC__DD(p,v) EMIT_8_8(p, O_JR_NC__DD, v)
 #define O_LD_SP_IMM 0x31
 #define L_LD_SP_IMM 1
 #define EMIT_LD_SP_IMM(p,v) EMIT_8_24(p, O_LD_SP_IMM, v)
@@ -185,9 +185,9 @@
 #define O_SCF 0x37
 #define L_SCF 1
 #define EMIT_SCF(p) EMIT_8(p, O_SCF)
-#define O_JR_C_DIST 0x38
-#define L_JR_C_DIST 1
-#define EMIT_JR_C_DIST(p) EMIT_8(p, O_JR_C_DIST)
+#define O_JR_C__DD 0x38
+#define L_JR_C__DD 1
+#define EMIT_JR_C__DD(p,v) EMIT_8_8(p, O_JR_C__DD, v)
 #define O_ADD_HL_SP 0x39
 #define L_ADD_HL_SP 1
 #define EMIT_ADD_HL_SP(p) EMIT_8(p, O_ADD_HL_SP)
