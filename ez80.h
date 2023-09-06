@@ -8,8 +8,8 @@
 
 #define EMIT_8(p,o) (*(uint8_t*)(p)++ = (o))
 #define EMIT_16(p,o) (*(uint16_t*)(p)++ = (o))
-#define EMIT_24(p,o) (*(uint24_t*)(p)++ = (o)
-#define EMIT_32(p,o) (*(uint32_t*)(p)++ = (o)
+#define EMIT_24(p,o) (*(uint24_t*)(p)++ = (o))
+#define EMIT_32(p,o) (*(uint32_t*)(p)++ = (o))
 #define EMIT_8_8(p,o,v) EMIT_16(p,(o)|((v)<<8))
 #define EMIT_16_8(p,o,v) EMIT_24(p,(o)|((v)<<16))
 #define EMIT_8_24(p,o,v) EMIT_32(p,(o)|((v)<<8))
