@@ -99,7 +99,7 @@ data = """
 60 LD   H,B         LD   IXH,B       BIT  4,B         -                IN   H,(BC)
 61 LD   H,C         LD   IXH,C       BIT  4,C         -                OUT  (BC),H
 62 LD   H,D         LD   IXH,D       BIT  4,D         -                SBC  HL,HL
-63 LD   H,E         LD   IXH,E       BIT  4,E         -                LD   (&0000),HL
+63 LD   H,E         LD   IXH,E       BIT  4,E         -                -
 64 LD   H,H         LD   IXH,IXH     BIT  4,H         -                TST  A,&00
 65 LD   H,L         LD   IXH,IXL     BIT  4,L         -                PEA  IX+d
 66 LD   H,(HL)      LD   H,(IX+d)    BIT  4,(HL)      BIT 4,(IY+d)     PEA  IY+d
@@ -107,7 +107,7 @@ data = """
 68 LD   L,B         LD   IXL,B       BIT  5,B         -                IN   L,(BC)
 69 LD   L,C         LD   IXL,C       BIT  5,C         -                OUT  (BC),L
 6A LD   L,D         LD   IXL,D       BIT  5,D         -                ADC  HL,HL
-6B LD   L,E         LD   IXL,E       BIT  5,E         -                LD   HL,(&0000)
+6B LD   L,E         LD   IXL,E       BIT  5,E         -                -
 6C LD   L,H         LD   IXL,IXH     BIT  5,H         -                MLT  HL
 6D LD   L,L         LD   IXL,IXL     BIT  5,L         -                LD   MB,A
 6E LD   L,(HL)      LD   L,(IX+d)    BIT  5,(HL)      BIT 5,(IY+d)     LD   A,MB
@@ -267,9 +267,9 @@ with open("ez80.h","w") as f:
 		if len(line):
 			tbl[0].append((line[3:20], N))
 			tbl[1].append((line[20:36], N*0x100+0xDD))
-			tbl[1].append((line[20:36].replace("IX","IY"), N*0x100+0xFD))
+			tbl[1].append((line[20:36].replace("(IX","(IY").replace("IXL","IYL").replace("IXH","IYH"), N*0x100+0xFD))
 			tbl[2].append((line[37:54], N*0x100+0xCB))
-			tbl[3].append((line[54:71].replace("IY","IX"), N*0x10000+0xCBDD))
+			tbl[3].append((line[54:71].replace("(IY","(IX").replace("IYL","IXL").replace("IYH","IXH"), N*0x10000+0xCBDD))
 			tbl[3].append((line[54:71], N*0x10000+0xCBFD))
 			tbl[4].append((line[71:], N*0x100+0xED))
 			N+=1
