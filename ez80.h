@@ -3,7 +3,7 @@
 // eZ80 opcode defines. Generated from http://mdfs.net/Docs.Comp.eZ80.OpList
 // Opcode values are defined little-endian.
 // Opcodes are uppercase with underscores for spaces, IND for indirects, IMM for immediates, DD for displacements, etc.
-// Each opcode has an accompanying define for how long (in bytes) the opcode is.
+// Each opcode has an accompanying define for how long (in bytes) the opcode (including arguments) is.
 // A macro is defined for emitting each opcode to a pointer.
 
 #define EMIT_8(p,o) (*(uint8_t*)(p)++ = (o))
@@ -21,7 +21,7 @@
 #define L_NOP 1
 #define EMIT_NOP(p) EMIT_8(p, O_NOP)
 #define O_LD_BC_IMM 0x01
-#define L_LD_BC_IMM 1
+#define L_LD_BC_IMM 3
 #define EMIT_LD_BC_IMM(p,v) EMIT_8_24(p, O_LD_BC_IMM, v)
 #define O_LD_IND_BC_A 0x02
 #define L_LD_IND_BC_A 1
@@ -36,7 +36,7 @@
 #define L_DEC_B 1
 #define EMIT_DEC_B(p) EMIT_8(p, O_DEC_B)
 #define O_LD_B_IMM 0x06
-#define L_LD_B_IMM 1
+#define L_LD_B_IMM 2
 #define EMIT_LD_B_IMM(p,v) EMIT_8_8(p, O_LD_B_IMM, v)
 #define O_RLCA 0x07
 #define L_RLCA 1
@@ -60,16 +60,16 @@
 #define L_DEC_C 1
 #define EMIT_DEC_C(p) EMIT_8(p, O_DEC_C)
 #define O_LD_C_IMM 0x0E
-#define L_LD_C_IMM 1
+#define L_LD_C_IMM 2
 #define EMIT_LD_C_IMM(p,v) EMIT_8_8(p, O_LD_C_IMM, v)
 #define O_RRCA 0x0F
 #define L_RRCA 1
 #define EMIT_RRCA(p) EMIT_8(p, O_RRCA)
-#define O_DJNZ__DD 0x10
-#define L_DJNZ__DD 1
-#define EMIT_DJNZ__DD(p,v) EMIT_8_8(p, O_DJNZ__DD, v)
+#define O_DJNZ_IMM 0x10
+#define L_DJNZ_IMM 2
+#define EMIT_DJNZ_IMM(p,v) EMIT_8_8(p, O_DJNZ_IMM, v)
 #define O_LD_DE_IMM 0x11
-#define L_LD_DE_IMM 1
+#define L_LD_DE_IMM 3
 #define EMIT_LD_DE_IMM(p,v) EMIT_8_24(p, O_LD_DE_IMM, v)
 #define O_LD_IND_DE_A 0x12
 #define L_LD_IND_DE_A 1
@@ -84,13 +84,13 @@
 #define L_DEC_D 1
 #define EMIT_DEC_D(p) EMIT_8(p, O_DEC_D)
 #define O_LD_D_IMM 0x16
-#define L_LD_D_IMM 1
+#define L_LD_D_IMM 2
 #define EMIT_LD_D_IMM(p,v) EMIT_8_8(p, O_LD_D_IMM, v)
 #define O_RLA 0x17
 #define L_RLA 1
 #define EMIT_RLA(p) EMIT_8(p, O_RLA)
 #define O_JR_IMM 0x18
-#define L_JR_IMM 1
+#define L_JR_IMM 2
 #define EMIT_JR_IMM(p,v) EMIT_8_8(p, O_JR_IMM, v)
 #define O_ADD_HL_DE 0x19
 #define L_ADD_HL_DE 1
@@ -108,19 +108,19 @@
 #define L_DEC_E 1
 #define EMIT_DEC_E(p) EMIT_8(p, O_DEC_E)
 #define O_LD_E_IMM 0x1E
-#define L_LD_E_IMM 1
+#define L_LD_E_IMM 2
 #define EMIT_LD_E_IMM(p,v) EMIT_8_8(p, O_LD_E_IMM, v)
 #define O_RRA 0x1F
 #define L_RRA 1
 #define EMIT_RRA(p) EMIT_8(p, O_RRA)
 #define O_JR_NZ_IMM 0x20
-#define L_JR_NZ_IMM 1
+#define L_JR_NZ_IMM 2
 #define EMIT_JR_NZ_IMM(p,v) EMIT_8_8(p, O_JR_NZ_IMM, v)
 #define O_LD_HL_IMM 0x21
-#define L_LD_HL_IMM 1
+#define L_LD_HL_IMM 3
 #define EMIT_LD_HL_IMM(p,v) EMIT_8_24(p, O_LD_HL_IMM, v)
 #define O_LD_IND_IMM_HL 0x22
-#define L_LD_IND_IMM_HL 1
+#define L_LD_IND_IMM_HL 3
 #define EMIT_LD_IND_IMM_HL(p,v) EMIT_8_24(p, O_LD_IND_IMM_HL, v)
 #define O_INC_HL 0x23
 #define L_INC_HL 1
@@ -132,19 +132,19 @@
 #define L_DEC_H 1
 #define EMIT_DEC_H(p) EMIT_8(p, O_DEC_H)
 #define O_LD_H_IMM 0x26
-#define L_LD_H_IMM 1
+#define L_LD_H_IMM 2
 #define EMIT_LD_H_IMM(p,v) EMIT_8_8(p, O_LD_H_IMM, v)
 #define O_DAA 0x27
 #define L_DAA 1
 #define EMIT_DAA(p) EMIT_8(p, O_DAA)
 #define O_JR_Z_IMM 0x28
-#define L_JR_Z_IMM 1
+#define L_JR_Z_IMM 2
 #define EMIT_JR_Z_IMM(p,v) EMIT_8_8(p, O_JR_Z_IMM, v)
 #define O_ADD_HL_HL 0x29
 #define L_ADD_HL_HL 1
 #define EMIT_ADD_HL_HL(p) EMIT_8(p, O_ADD_HL_HL)
 #define O_LD_HL_IND_IMM 0x2A
-#define L_LD_HL_IND_IMM 1
+#define L_LD_HL_IND_IMM 3
 #define EMIT_LD_HL_IND_IMM(p,v) EMIT_8_24(p, O_LD_HL_IND_IMM, v)
 #define O_DEC_HL 0x2B
 #define L_DEC_HL 1
@@ -156,19 +156,19 @@
 #define L_DEC_L 1
 #define EMIT_DEC_L(p) EMIT_8(p, O_DEC_L)
 #define O_LD_L_IMM 0x2E
-#define L_LD_L_IMM 1
+#define L_LD_L_IMM 2
 #define EMIT_LD_L_IMM(p,v) EMIT_8_8(p, O_LD_L_IMM, v)
 #define O_CPL 0x2F
 #define L_CPL 1
 #define EMIT_CPL(p) EMIT_8(p, O_CPL)
 #define O_JR_NC_IMM 0x30
-#define L_JR_NC_IMM 1
+#define L_JR_NC_IMM 2
 #define EMIT_JR_NC_IMM(p,v) EMIT_8_8(p, O_JR_NC_IMM, v)
 #define O_LD_SP_IMM 0x31
-#define L_LD_SP_IMM 1
+#define L_LD_SP_IMM 3
 #define EMIT_LD_SP_IMM(p,v) EMIT_8_24(p, O_LD_SP_IMM, v)
 #define O_LD_IND_IMM_A 0x32
-#define L_LD_IND_IMM_A 1
+#define L_LD_IND_IMM_A 3
 #define EMIT_LD_IND_IMM_A(p,v) EMIT_8_24(p, O_LD_IND_IMM_A, v)
 #define O_INC_SP 0x33
 #define L_INC_SP 1
@@ -180,19 +180,19 @@
 #define L_DEC_IND_HL 1
 #define EMIT_DEC_IND_HL(p) EMIT_8(p, O_DEC_IND_HL)
 #define O_LD_IND_HL_IMM 0x36
-#define L_LD_IND_HL_IMM 1
+#define L_LD_IND_HL_IMM 2
 #define EMIT_LD_IND_HL_IMM(p,v) EMIT_8_8(p, O_LD_IND_HL_IMM, v)
 #define O_SCF 0x37
 #define L_SCF 1
 #define EMIT_SCF(p) EMIT_8(p, O_SCF)
 #define O_JR_C_IMM 0x38
-#define L_JR_C_IMM 1
+#define L_JR_C_IMM 2
 #define EMIT_JR_C_IMM(p,v) EMIT_8_8(p, O_JR_C_IMM, v)
 #define O_ADD_HL_SP 0x39
 #define L_ADD_HL_SP 1
 #define EMIT_ADD_HL_SP(p) EMIT_8(p, O_ADD_HL_SP)
 #define O_LD_A_IND_IMM 0x3A
-#define L_LD_A_IND_IMM 1
+#define L_LD_A_IND_IMM 3
 #define EMIT_LD_A_IND_IMM(p,v) EMIT_8_24(p, O_LD_A_IND_IMM, v)
 #define O_DEC_SP 0x3B
 #define L_DEC_SP 1
@@ -204,7 +204,7 @@
 #define L_DEC_A 1
 #define EMIT_DEC_A(p) EMIT_8(p, O_DEC_A)
 #define O_LD_A_IMM 0x3E
-#define L_LD_A_IMM 1
+#define L_LD_A_IMM 2
 #define EMIT_LD_A_IMM(p,v) EMIT_8_8(p, O_LD_A_IMM, v)
 #define O_CCF 0x3F
 #define L_CCF 1
@@ -600,22 +600,22 @@
 #define L_POP_BC 1
 #define EMIT_POP_BC(p) EMIT_8(p, O_POP_BC)
 #define O_JP_NZ_IMM 0xC2
-#define L_JP_NZ_IMM 1
+#define L_JP_NZ_IMM 3
 #define EMIT_JP_NZ_IMM(p,v) EMIT_8_24(p, O_JP_NZ_IMM, v)
 #define O_JP_IMM 0xC3
-#define L_JP_IMM 1
+#define L_JP_IMM 3
 #define EMIT_JP_IMM(p,v) EMIT_8_24(p, O_JP_IMM, v)
 #define O_CALL_NZ_IMM 0xC4
-#define L_CALL_NZ_IMM 1
+#define L_CALL_NZ_IMM 3
 #define EMIT_CALL_NZ_IMM(p,v) EMIT_8_24(p, O_CALL_NZ_IMM, v)
 #define O_PUSH_BC 0xC5
 #define L_PUSH_BC 1
 #define EMIT_PUSH_BC(p) EMIT_8(p, O_PUSH_BC)
 #define O_ADD_A_IMM 0xC6
-#define L_ADD_A_IMM 1
+#define L_ADD_A_IMM 2
 #define EMIT_ADD_A_IMM(p,v) EMIT_8_8(p, O_ADD_A_IMM, v)
 #define O_RST_00 0xC7
-#define L_RST_00 1
+#define L_RST_00 2
 #define EMIT_RST_00(p,v) EMIT_8_8(p, O_RST_00, v)
 #define O_RET_Z 0xC8
 #define L_RET_Z 1
@@ -624,16 +624,16 @@
 #define L_RET 1
 #define EMIT_RET(p) EMIT_8(p, O_RET)
 #define O_JP_Z_IMM 0xCA
-#define L_JP_Z_IMM 1
+#define L_JP_Z_IMM 3
 #define EMIT_JP_Z_IMM(p,v) EMIT_8_24(p, O_JP_Z_IMM, v)
 #define O_CALL_Z_IMM 0xCC
-#define L_CALL_Z_IMM 1
+#define L_CALL_Z_IMM 3
 #define EMIT_CALL_Z_IMM(p,v) EMIT_8_24(p, O_CALL_Z_IMM, v)
 #define O_CALL_IMM 0xCD
-#define L_CALL_IMM 1
+#define L_CALL_IMM 3
 #define EMIT_CALL_IMM(p,v) EMIT_8_24(p, O_CALL_IMM, v)
 #define O_ADC_A_IMM 0xCE
-#define L_ADC_A_IMM 1
+#define L_ADC_A_IMM 2
 #define EMIT_ADC_A_IMM(p,v) EMIT_8_8(p, O_ADC_A_IMM, v)
 #define O_RST_08 0xCF
 #define L_RST_08 1
@@ -645,19 +645,19 @@
 #define L_POP_DE 1
 #define EMIT_POP_DE(p) EMIT_8(p, O_POP_DE)
 #define O_JP_NC_IMM 0xD2
-#define L_JP_NC_IMM 1
+#define L_JP_NC_IMM 3
 #define EMIT_JP_NC_IMM(p,v) EMIT_8_24(p, O_JP_NC_IMM, v)
 #define O_OUT_IND_IMM_A 0xD3
-#define L_OUT_IND_IMM_A 1
+#define L_OUT_IND_IMM_A 2
 #define EMIT_OUT_IND_IMM_A(p,v) EMIT_8_8(p, O_OUT_IND_IMM_A, v)
 #define O_CALL_NC_IMM 0xD4
-#define L_CALL_NC_IMM 1
+#define L_CALL_NC_IMM 3
 #define EMIT_CALL_NC_IMM(p,v) EMIT_8_24(p, O_CALL_NC_IMM, v)
 #define O_PUSH_DE 0xD5
 #define L_PUSH_DE 1
 #define EMIT_PUSH_DE(p) EMIT_8(p, O_PUSH_DE)
 #define O_SUB_A_IMM 0xD6
-#define L_SUB_A_IMM 1
+#define L_SUB_A_IMM 2
 #define EMIT_SUB_A_IMM(p,v) EMIT_8_8(p, O_SUB_A_IMM, v)
 #define O_RST_10 0xD7
 #define L_RST_10 1
@@ -669,16 +669,16 @@
 #define L_EXX 1
 #define EMIT_EXX(p) EMIT_8(p, O_EXX)
 #define O_JP_C_IMM 0xDA
-#define L_JP_C_IMM 1
+#define L_JP_C_IMM 3
 #define EMIT_JP_C_IMM(p,v) EMIT_8_24(p, O_JP_C_IMM, v)
 #define O_IN_A_IND_IMM 0xDB
-#define L_IN_A_IND_IMM 1
+#define L_IN_A_IND_IMM 2
 #define EMIT_IN_A_IND_IMM(p,v) EMIT_8_8(p, O_IN_A_IND_IMM, v)
 #define O_CALL_C_IMM 0xDC
-#define L_CALL_C_IMM 1
+#define L_CALL_C_IMM 3
 #define EMIT_CALL_C_IMM(p,v) EMIT_8_24(p, O_CALL_C_IMM, v)
 #define O_SBC_A_IMM 0xDE
-#define L_SBC_A_IMM 1
+#define L_SBC_A_IMM 2
 #define EMIT_SBC_A_IMM(p,v) EMIT_8_8(p, O_SBC_A_IMM, v)
 #define O_RST_18 0xDF
 #define L_RST_18 1
@@ -690,19 +690,19 @@
 #define L_POP_HL 1
 #define EMIT_POP_HL(p) EMIT_8(p, O_POP_HL)
 #define O_JP_PO_IMM 0xE2
-#define L_JP_PO_IMM 1
+#define L_JP_PO_IMM 3
 #define EMIT_JP_PO_IMM(p,v) EMIT_8_24(p, O_JP_PO_IMM, v)
 #define O_EX_IND_SP_HL 0xE3
 #define L_EX_IND_SP_HL 1
 #define EMIT_EX_IND_SP_HL(p) EMIT_8(p, O_EX_IND_SP_HL)
 #define O_CALL_PO_IMM 0xE4
-#define L_CALL_PO_IMM 1
+#define L_CALL_PO_IMM 3
 #define EMIT_CALL_PO_IMM(p,v) EMIT_8_24(p, O_CALL_PO_IMM, v)
 #define O_PUSH_HL 0xE5
 #define L_PUSH_HL 1
 #define EMIT_PUSH_HL(p) EMIT_8(p, O_PUSH_HL)
 #define O_AND_IMM 0xE6
-#define L_AND_IMM 1
+#define L_AND_IMM 2
 #define EMIT_AND_IMM(p,v) EMIT_8_8(p, O_AND_IMM, v)
 #define O_RST_20 0xE7
 #define L_RST_20 1
@@ -714,16 +714,16 @@
 #define L_JP_IND_HL 1
 #define EMIT_JP_IND_HL(p) EMIT_8(p, O_JP_IND_HL)
 #define O_JP_PE_IMM 0xEA
-#define L_JP_PE_IMM 1
+#define L_JP_PE_IMM 3
 #define EMIT_JP_PE_IMM(p,v) EMIT_8_24(p, O_JP_PE_IMM, v)
 #define O_EX_DE_HL 0xEB
 #define L_EX_DE_HL 1
 #define EMIT_EX_DE_HL(p) EMIT_8(p, O_EX_DE_HL)
 #define O_CALL_PE_IMM 0xEC
-#define L_CALL_PE_IMM 1
+#define L_CALL_PE_IMM 3
 #define EMIT_CALL_PE_IMM(p,v) EMIT_8_24(p, O_CALL_PE_IMM, v)
 #define O_XOR_IMM 0xEE
-#define L_XOR_IMM 1
+#define L_XOR_IMM 2
 #define EMIT_XOR_IMM(p,v) EMIT_8_8(p, O_XOR_IMM, v)
 #define O_RST_28 0xEF
 #define L_RST_28 1
@@ -735,19 +735,19 @@
 #define L_POP_AF 1
 #define EMIT_POP_AF(p) EMIT_8(p, O_POP_AF)
 #define O_JP_P_IMM 0xF2
-#define L_JP_P_IMM 1
+#define L_JP_P_IMM 3
 #define EMIT_JP_P_IMM(p,v) EMIT_8_24(p, O_JP_P_IMM, v)
 #define O_DI 0xF3
 #define L_DI 1
 #define EMIT_DI(p) EMIT_8(p, O_DI)
 #define O_CALL_P_IMM 0xF4
-#define L_CALL_P_IMM 1
+#define L_CALL_P_IMM 3
 #define EMIT_CALL_P_IMM(p,v) EMIT_8_24(p, O_CALL_P_IMM, v)
 #define O_PUSH_AF 0xF5
 #define L_PUSH_AF 1
 #define EMIT_PUSH_AF(p) EMIT_8(p, O_PUSH_AF)
 #define O_OR_IMM 0xF6
-#define L_OR_IMM 1
+#define L_OR_IMM 2
 #define EMIT_OR_IMM(p,v) EMIT_8_8(p, O_OR_IMM, v)
 #define O_RST_30 0xF7
 #define L_RST_30 1
@@ -759,25 +759,25 @@
 #define L_LD_SP_HL 1
 #define EMIT_LD_SP_HL(p) EMIT_8(p, O_LD_SP_HL)
 #define O_JP_M_IMM 0xFA
-#define L_JP_M_IMM 1
+#define L_JP_M_IMM 3
 #define EMIT_JP_M_IMM(p,v) EMIT_8_24(p, O_JP_M_IMM, v)
 #define O_EI 0xFB
 #define L_EI 1
 #define EMIT_EI(p) EMIT_8(p, O_EI)
 #define O_CALL_M_IMM 0xFC
-#define L_CALL_M_IMM 1
+#define L_CALL_M_IMM 3
 #define EMIT_CALL_M_IMM(p,v) EMIT_8_24(p, O_CALL_M_IMM, v)
 #define O_CP_IMM 0xFE
-#define L_CP_IMM 1
+#define L_CP_IMM 2
 #define EMIT_CP_IMM(p,v) EMIT_8_8(p, O_CP_IMM, v)
 #define O_RST_38 0xFF
 #define L_RST_38 1
 #define EMIT_RST_38(p) EMIT_8(p, O_RST_38)
 #define O_LD_BC_IND_IX_DD 0x07DD
-#define L_LD_BC_IND_IX_DD 2
+#define L_LD_BC_IND_IX_DD 3
 #define EMIT_LD_BC_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_BC_IND_IX_DD, v)
 #define O_LD_BC_IND_IY_DD 0x07FD
-#define L_LD_BC_IND_IY_DD 2
+#define L_LD_BC_IND_IY_DD 3
 #define EMIT_LD_BC_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_BC_IND_IY_DD, v)
 #define O_ADD_IX_BC 0x09DD
 #define L_ADD_IX_BC 2
@@ -786,16 +786,16 @@
 #define L_ADD_IX_BC 2
 #define EMIT_ADD_IX_BC(p) EMIT_16(p, O_ADD_IX_BC)
 #define O_LD_IND_IX_DD_BC 0x0FDD
-#define L_LD_IND_IX_DD_BC 2
+#define L_LD_IND_IX_DD_BC 3
 #define EMIT_LD_IND_IX_DD_BC(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_BC, v)
 #define O_LD_IND_IY_DD_BC 0x0FFD
-#define L_LD_IND_IY_DD_BC 2
+#define L_LD_IND_IY_DD_BC 3
 #define EMIT_LD_IND_IY_DD_BC(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_BC, v)
 #define O_LD_DE_IND_IX_DD 0x17DD
-#define L_LD_DE_IND_IX_DD 2
+#define L_LD_DE_IND_IX_DD 3
 #define EMIT_LD_DE_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_DE_IND_IX_DD, v)
 #define O_LD_DE_IND_IY_DD 0x17FD
-#define L_LD_DE_IND_IY_DD 2
+#define L_LD_DE_IND_IY_DD 3
 #define EMIT_LD_DE_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_DE_IND_IY_DD, v)
 #define O_ADD_IX_DE 0x19DD
 #define L_ADD_IX_DE 2
@@ -804,22 +804,22 @@
 #define L_ADD_IX_DE 2
 #define EMIT_ADD_IX_DE(p) EMIT_16(p, O_ADD_IX_DE)
 #define O_LD_IND_IX_DD_DE 0x1FDD
-#define L_LD_IND_IX_DD_DE 2
+#define L_LD_IND_IX_DD_DE 3
 #define EMIT_LD_IND_IX_DD_DE(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_DE, v)
 #define O_LD_IND_IY_DD_DE 0x1FFD
-#define L_LD_IND_IY_DD_DE 2
+#define L_LD_IND_IY_DD_DE 3
 #define EMIT_LD_IND_IY_DD_DE(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_DE, v)
 #define O_LD_IX_IMM 0x21DD
-#define L_LD_IX_IMM 2
+#define L_LD_IX_IMM 4
 #define EMIT_LD_IX_IMM(p,v) EMIT_16_24(p, O_LD_IX_IMM, v)
 #define O_LD_IX_IMM 0x21FD
-#define L_LD_IX_IMM 2
+#define L_LD_IX_IMM 4
 #define EMIT_LD_IX_IMM(p,v) EMIT_16_24(p, O_LD_IX_IMM, v)
 #define O_LD_IND_IMM_IX 0x22DD
-#define L_LD_IND_IMM_IX 2
+#define L_LD_IND_IMM_IX 4
 #define EMIT_LD_IND_IMM_IX(p,v) EMIT_16_24(p, O_LD_IND_IMM_IX, v)
 #define O_LD_IND_IMM_IX 0x22FD
-#define L_LD_IND_IMM_IX 2
+#define L_LD_IND_IMM_IX 4
 #define EMIT_LD_IND_IMM_IX(p,v) EMIT_16_24(p, O_LD_IND_IMM_IX, v)
 #define O_INC_IX 0x23DD
 #define L_INC_IX 2
@@ -840,16 +840,16 @@
 #define L_DEC_IYH 2
 #define EMIT_DEC_IYH(p) EMIT_16(p, O_DEC_IYH)
 #define O_LD_IXH_IMM 0x26DD
-#define L_LD_IXH_IMM 2
+#define L_LD_IXH_IMM 3
 #define EMIT_LD_IXH_IMM(p,v) EMIT_16_8(p, O_LD_IXH_IMM, v)
 #define O_LD_IYH_IMM 0x26FD
-#define L_LD_IYH_IMM 2
+#define L_LD_IYH_IMM 3
 #define EMIT_LD_IYH_IMM(p,v) EMIT_16_8(p, O_LD_IYH_IMM, v)
 #define O_LD_HL_IND_IX_DD 0x27DD
-#define L_LD_HL_IND_IX_DD 2
+#define L_LD_HL_IND_IX_DD 3
 #define EMIT_LD_HL_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_HL_IND_IX_DD, v)
 #define O_LD_HL_IND_IY_DD 0x27FD
-#define L_LD_HL_IND_IY_DD 2
+#define L_LD_HL_IND_IY_DD 3
 #define EMIT_LD_HL_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_HL_IND_IY_DD, v)
 #define O_ADD_IX_IX 0x29DD
 #define L_ADD_IX_IX 2
@@ -858,10 +858,10 @@
 #define L_ADD_IX_IX 2
 #define EMIT_ADD_IX_IX(p) EMIT_16(p, O_ADD_IX_IX)
 #define O_LD_IX_IND_IMM 0x2ADD
-#define L_LD_IX_IND_IMM 2
+#define L_LD_IX_IND_IMM 4
 #define EMIT_LD_IX_IND_IMM(p,v) EMIT_16_24(p, O_LD_IX_IND_IMM, v)
 #define O_LD_IX_IND_IMM 0x2AFD
-#define L_LD_IX_IND_IMM 2
+#define L_LD_IX_IND_IMM 4
 #define EMIT_LD_IX_IND_IMM(p,v) EMIT_16_24(p, O_LD_IX_IND_IMM, v)
 #define O_DEC_IX 0x2BDD
 #define L_DEC_IX 2
@@ -882,46 +882,46 @@
 #define L_DEC_IYL 2
 #define EMIT_DEC_IYL(p) EMIT_16(p, O_DEC_IYL)
 #define O_LD_IXL_IMM 0x2EDD
-#define L_LD_IXL_IMM 2
+#define L_LD_IXL_IMM 3
 #define EMIT_LD_IXL_IMM(p,v) EMIT_16_8(p, O_LD_IXL_IMM, v)
 #define O_LD_IYL_IMM 0x2EFD
-#define L_LD_IYL_IMM 2
+#define L_LD_IYL_IMM 3
 #define EMIT_LD_IYL_IMM(p,v) EMIT_16_8(p, O_LD_IYL_IMM, v)
 #define O_LD_IND_IX_DD_HL 0x2FDD
-#define L_LD_IND_IX_DD_HL 2
+#define L_LD_IND_IX_DD_HL 3
 #define EMIT_LD_IND_IX_DD_HL(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_HL, v)
 #define O_LD_IND_IY_DD_HL 0x2FFD
-#define L_LD_IND_IY_DD_HL 2
+#define L_LD_IND_IY_DD_HL 3
 #define EMIT_LD_IND_IY_DD_HL(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_HL, v)
 #define O_LD_IY_IND_IX_DD 0x31DD
-#define L_LD_IY_IND_IX_DD 2
+#define L_LD_IY_IND_IX_DD 3
 #define EMIT_LD_IY_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_IY_IND_IX_DD, v)
 #define O_LD_IY_IND_IY_DD 0x31FD
-#define L_LD_IY_IND_IY_DD 2
+#define L_LD_IY_IND_IY_DD 3
 #define EMIT_LD_IY_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_IY_IND_IY_DD, v)
 #define O_INC_IND_IX_DD 0x34DD
-#define L_INC_IND_IX_DD 2
+#define L_INC_IND_IX_DD 3
 #define EMIT_INC_IND_IX_DD(p,v) EMIT_16_8(p, O_INC_IND_IX_DD, v)
 #define O_INC_IND_IY_DD 0x34FD
-#define L_INC_IND_IY_DD 2
+#define L_INC_IND_IY_DD 3
 #define EMIT_INC_IND_IY_DD(p,v) EMIT_16_8(p, O_INC_IND_IY_DD, v)
 #define O_DEC_IND_IX_DD 0x35DD
-#define L_DEC_IND_IX_DD 2
+#define L_DEC_IND_IX_DD 3
 #define EMIT_DEC_IND_IX_DD(p,v) EMIT_16_8(p, O_DEC_IND_IX_DD, v)
 #define O_DEC_IND_IY_DD 0x35FD
-#define L_DEC_IND_IY_DD 2
+#define L_DEC_IND_IY_DD 3
 #define EMIT_DEC_IND_IY_DD(p,v) EMIT_16_8(p, O_DEC_IND_IY_DD, v)
 #define O_LD_IND_IX_DD_IMM 0x36DD
-#define L_LD_IND_IX_DD_IMM 2
+#define L_LD_IND_IX_DD_IMM 4
 #define EMIT_LD_IND_IX_DD_IMM(p,d,v) EMIT_16_8_8(p, O_LD_IND_IX_DD_IMM, d, v)
 #define O_LD_IND_IY_DD_IMM 0x36FD
-#define L_LD_IND_IY_DD_IMM 2
+#define L_LD_IND_IY_DD_IMM 4
 #define EMIT_LD_IND_IY_DD_IMM(p,d,v) EMIT_16_8_8(p, O_LD_IND_IY_DD_IMM, d, v)
 #define O_LD_IX_IND_IX_DD 0x37DD
-#define L_LD_IX_IND_IX_DD 2
+#define L_LD_IX_IND_IX_DD 3
 #define EMIT_LD_IX_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_IX_IND_IX_DD, v)
 #define O_LD_IX_IND_IY_DD 0x37FD
-#define L_LD_IX_IND_IY_DD 2
+#define L_LD_IX_IND_IY_DD 3
 #define EMIT_LD_IX_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_IX_IND_IY_DD, v)
 #define O_ADD_IX_SP 0x39DD
 #define L_ADD_IX_SP 2
@@ -930,16 +930,16 @@
 #define L_ADD_IX_SP 2
 #define EMIT_ADD_IX_SP(p) EMIT_16(p, O_ADD_IX_SP)
 #define O_LD_IND_IX_DD_IY 0x3EDD
-#define L_LD_IND_IX_DD_IY 2
+#define L_LD_IND_IX_DD_IY 3
 #define EMIT_LD_IND_IX_DD_IY(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_IY, v)
 #define O_LD_IND_IY_DD_IY 0x3EFD
-#define L_LD_IND_IY_DD_IY 2
+#define L_LD_IND_IY_DD_IY 3
 #define EMIT_LD_IND_IY_DD_IY(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_IY, v)
 #define O_LD_IND_IX_DD_IX 0x3FDD
-#define L_LD_IND_IX_DD_IX 2
+#define L_LD_IND_IX_DD_IX 3
 #define EMIT_LD_IND_IX_DD_IX(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_IX, v)
 #define O_LD_IND_IY_DD_IX 0x3FFD
-#define L_LD_IND_IY_DD_IX 2
+#define L_LD_IND_IY_DD_IX 3
 #define EMIT_LD_IND_IY_DD_IX(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_IX, v)
 #define O_LD_B_IXH 0x44DD
 #define L_LD_B_IXH 2
@@ -954,10 +954,10 @@
 #define L_LD_B_IYL 2
 #define EMIT_LD_B_IYL(p) EMIT_16(p, O_LD_B_IYL)
 #define O_LD_B_IND_IX_DD 0x46DD
-#define L_LD_B_IND_IX_DD 2
+#define L_LD_B_IND_IX_DD 3
 #define EMIT_LD_B_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_B_IND_IX_DD, v)
 #define O_LD_B_IND_IY_DD 0x46FD
-#define L_LD_B_IND_IY_DD 2
+#define L_LD_B_IND_IY_DD 3
 #define EMIT_LD_B_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_B_IND_IY_DD, v)
 #define O_LD_C_IXH 0x4CDD
 #define L_LD_C_IXH 2
@@ -972,10 +972,10 @@
 #define L_LD_C_IYL 2
 #define EMIT_LD_C_IYL(p) EMIT_16(p, O_LD_C_IYL)
 #define O_LD_C_IND_IX_DD 0x4EDD
-#define L_LD_C_IND_IX_DD 2
+#define L_LD_C_IND_IX_DD 3
 #define EMIT_LD_C_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_C_IND_IX_DD, v)
 #define O_LD_C_IND_IY_DD 0x4EFD
-#define L_LD_C_IND_IY_DD 2
+#define L_LD_C_IND_IY_DD 3
 #define EMIT_LD_C_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_C_IND_IY_DD, v)
 #define O_LD_D_IXH 0x54DD
 #define L_LD_D_IXH 2
@@ -990,10 +990,10 @@
 #define L_LD_D_IYL 2
 #define EMIT_LD_D_IYL(p) EMIT_16(p, O_LD_D_IYL)
 #define O_LD_D_IND_IX_DD 0x56DD
-#define L_LD_D_IND_IX_DD 2
+#define L_LD_D_IND_IX_DD 3
 #define EMIT_LD_D_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_D_IND_IX_DD, v)
 #define O_LD_D_IND_IY_DD 0x56FD
-#define L_LD_D_IND_IY_DD 2
+#define L_LD_D_IND_IY_DD 3
 #define EMIT_LD_D_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_D_IND_IY_DD, v)
 #define O_LD_E_IXH 0x5CDD
 #define L_LD_E_IXH 2
@@ -1008,10 +1008,10 @@
 #define L_LD_E_IYL 2
 #define EMIT_LD_E_IYL(p) EMIT_16(p, O_LD_E_IYL)
 #define O_LD_E_IND_IX_DD 0x5EDD
-#define L_LD_E_IND_IX_DD 2
+#define L_LD_E_IND_IX_DD 3
 #define EMIT_LD_E_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_E_IND_IX_DD, v)
 #define O_LD_E_IND_IY_DD 0x5EFD
-#define L_LD_E_IND_IY_DD 2
+#define L_LD_E_IND_IY_DD 3
 #define EMIT_LD_E_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_E_IND_IY_DD, v)
 #define O_LD_IXH_B 0x60DD
 #define L_LD_IXH_B 2
@@ -1050,10 +1050,10 @@
 #define L_LD_IYH_IYL 2
 #define EMIT_LD_IYH_IYL(p) EMIT_16(p, O_LD_IYH_IYL)
 #define O_LD_H_IND_IX_DD 0x66DD
-#define L_LD_H_IND_IX_DD 2
+#define L_LD_H_IND_IX_DD 3
 #define EMIT_LD_H_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_H_IND_IX_DD, v)
 #define O_LD_H_IND_IY_DD 0x66FD
-#define L_LD_H_IND_IY_DD 2
+#define L_LD_H_IND_IY_DD 3
 #define EMIT_LD_H_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_H_IND_IY_DD, v)
 #define O_LD_IXH_A 0x67DD
 #define L_LD_IXH_A 2
@@ -1098,10 +1098,10 @@
 #define L_LD_IYL_IYL 2
 #define EMIT_LD_IYL_IYL(p) EMIT_16(p, O_LD_IYL_IYL)
 #define O_LD_L_IND_IX_DD 0x6EDD
-#define L_LD_L_IND_IX_DD 2
+#define L_LD_L_IND_IX_DD 3
 #define EMIT_LD_L_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_L_IND_IX_DD, v)
 #define O_LD_L_IND_IY_DD 0x6EFD
-#define L_LD_L_IND_IY_DD 2
+#define L_LD_L_IND_IY_DD 3
 #define EMIT_LD_L_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_L_IND_IY_DD, v)
 #define O_LD_IXL_A 0x6FDD
 #define L_LD_IXL_A 2
@@ -1110,46 +1110,46 @@
 #define L_LD_IYL_A 2
 #define EMIT_LD_IYL_A(p) EMIT_16(p, O_LD_IYL_A)
 #define O_LD_IND_IX_DD_B 0x70DD
-#define L_LD_IND_IX_DD_B 2
+#define L_LD_IND_IX_DD_B 3
 #define EMIT_LD_IND_IX_DD_B(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_B, v)
 #define O_LD_IND_IY_DD_B 0x70FD
-#define L_LD_IND_IY_DD_B 2
+#define L_LD_IND_IY_DD_B 3
 #define EMIT_LD_IND_IY_DD_B(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_B, v)
 #define O_LD_IND_IX_DD_C 0x71DD
-#define L_LD_IND_IX_DD_C 2
+#define L_LD_IND_IX_DD_C 3
 #define EMIT_LD_IND_IX_DD_C(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_C, v)
 #define O_LD_IND_IY_DD_C 0x71FD
-#define L_LD_IND_IY_DD_C 2
+#define L_LD_IND_IY_DD_C 3
 #define EMIT_LD_IND_IY_DD_C(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_C, v)
 #define O_LD_IND_IX_DD_D 0x72DD
-#define L_LD_IND_IX_DD_D 2
+#define L_LD_IND_IX_DD_D 3
 #define EMIT_LD_IND_IX_DD_D(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_D, v)
 #define O_LD_IND_IY_DD_D 0x72FD
-#define L_LD_IND_IY_DD_D 2
+#define L_LD_IND_IY_DD_D 3
 #define EMIT_LD_IND_IY_DD_D(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_D, v)
 #define O_LD_IND_IX_DD_E 0x73DD
-#define L_LD_IND_IX_DD_E 2
+#define L_LD_IND_IX_DD_E 3
 #define EMIT_LD_IND_IX_DD_E(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_E, v)
 #define O_LD_IND_IY_DD_E 0x73FD
-#define L_LD_IND_IY_DD_E 2
+#define L_LD_IND_IY_DD_E 3
 #define EMIT_LD_IND_IY_DD_E(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_E, v)
 #define O_LD_IND_IX_DD_H 0x74DD
-#define L_LD_IND_IX_DD_H 2
+#define L_LD_IND_IX_DD_H 3
 #define EMIT_LD_IND_IX_DD_H(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_H, v)
 #define O_LD_IND_IY_DD_H 0x74FD
-#define L_LD_IND_IY_DD_H 2
+#define L_LD_IND_IY_DD_H 3
 #define EMIT_LD_IND_IY_DD_H(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_H, v)
 #define O_LD_IND_IX_DD_L 0x75DD
-#define L_LD_IND_IX_DD_L 2
+#define L_LD_IND_IX_DD_L 3
 #define EMIT_LD_IND_IX_DD_L(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_L, v)
 #define O_LD_IND_IY_DD_L 0x75FD
-#define L_LD_IND_IY_DD_L 2
+#define L_LD_IND_IY_DD_L 3
 #define EMIT_LD_IND_IY_DD_L(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_L, v)
 #define O_LD_IND_IX_DD_A 0x77DD
-#define L_LD_IND_IX_DD_A 2
+#define L_LD_IND_IX_DD_A 3
 #define EMIT_LD_IND_IX_DD_A(p,v) EMIT_16_8(p, O_LD_IND_IX_DD_A, v)
 #define O_LD_IND_IY_DD_A 0x77FD
-#define L_LD_IND_IY_DD_A 2
+#define L_LD_IND_IY_DD_A 3
 #define EMIT_LD_IND_IY_DD_A(p,v) EMIT_16_8(p, O_LD_IND_IY_DD_A, v)
 #define O_LD_A_IXH 0x7CDD
 #define L_LD_A_IXH 2
@@ -1164,10 +1164,10 @@
 #define L_LD_A_IYL 2
 #define EMIT_LD_A_IYL(p) EMIT_16(p, O_LD_A_IYL)
 #define O_LD_A_IND_IX_DD 0x7EDD
-#define L_LD_A_IND_IX_DD 2
+#define L_LD_A_IND_IX_DD 3
 #define EMIT_LD_A_IND_IX_DD(p,v) EMIT_16_8(p, O_LD_A_IND_IX_DD, v)
 #define O_LD_A_IND_IY_DD 0x7EFD
-#define L_LD_A_IND_IY_DD 2
+#define L_LD_A_IND_IY_DD 3
 #define EMIT_LD_A_IND_IY_DD(p,v) EMIT_16_8(p, O_LD_A_IND_IY_DD, v)
 #define O_ADD_A_IXH 0x84DD
 #define L_ADD_A_IXH 2
@@ -1182,10 +1182,10 @@
 #define L_ADD_A_IYL 2
 #define EMIT_ADD_A_IYL(p) EMIT_16(p, O_ADD_A_IYL)
 #define O_ADD_A_IND_IX_DD 0x86DD
-#define L_ADD_A_IND_IX_DD 2
+#define L_ADD_A_IND_IX_DD 3
 #define EMIT_ADD_A_IND_IX_DD(p,v) EMIT_16_8(p, O_ADD_A_IND_IX_DD, v)
 #define O_ADD_A_IND_IY_DD 0x86FD
-#define L_ADD_A_IND_IY_DD 2
+#define L_ADD_A_IND_IY_DD 3
 #define EMIT_ADD_A_IND_IY_DD(p,v) EMIT_16_8(p, O_ADD_A_IND_IY_DD, v)
 #define O_ADC_A_IXH 0x8CDD
 #define L_ADC_A_IXH 2
@@ -1200,10 +1200,10 @@
 #define L_ADC_A_IYL 2
 #define EMIT_ADC_A_IYL(p) EMIT_16(p, O_ADC_A_IYL)
 #define O_ADC_A_IND_IX_DD 0x8EDD
-#define L_ADC_A_IND_IX_DD 2
+#define L_ADC_A_IND_IX_DD 3
 #define EMIT_ADC_A_IND_IX_DD(p,v) EMIT_16_8(p, O_ADC_A_IND_IX_DD, v)
 #define O_ADC_A_IND_IY_DD 0x8EFD
-#define L_ADC_A_IND_IY_DD 2
+#define L_ADC_A_IND_IY_DD 3
 #define EMIT_ADC_A_IND_IY_DD(p,v) EMIT_16_8(p, O_ADC_A_IND_IY_DD, v)
 #define O_SUB_A_IXH 0x94DD
 #define L_SUB_A_IXH 2
@@ -1218,10 +1218,10 @@
 #define L_SUB_A_IYL 2
 #define EMIT_SUB_A_IYL(p) EMIT_16(p, O_SUB_A_IYL)
 #define O_SUB_A_IND_IX_DD 0x96DD
-#define L_SUB_A_IND_IX_DD 2
+#define L_SUB_A_IND_IX_DD 3
 #define EMIT_SUB_A_IND_IX_DD(p,v) EMIT_16_8(p, O_SUB_A_IND_IX_DD, v)
 #define O_SUB_A_IND_IY_DD 0x96FD
-#define L_SUB_A_IND_IY_DD 2
+#define L_SUB_A_IND_IY_DD 3
 #define EMIT_SUB_A_IND_IY_DD(p,v) EMIT_16_8(p, O_SUB_A_IND_IY_DD, v)
 #define O_SBC_A_IXH 0x9CDD
 #define L_SBC_A_IXH 2
@@ -1236,10 +1236,10 @@
 #define L_SBC_A_IYL 2
 #define EMIT_SBC_A_IYL(p) EMIT_16(p, O_SBC_A_IYL)
 #define O_SBC_A_IND_IX_DD 0x9EDD
-#define L_SBC_A_IND_IX_DD 2
+#define L_SBC_A_IND_IX_DD 3
 #define EMIT_SBC_A_IND_IX_DD(p,v) EMIT_16_8(p, O_SBC_A_IND_IX_DD, v)
 #define O_SBC_A_IND_IY_DD 0x9EFD
-#define L_SBC_A_IND_IY_DD 2
+#define L_SBC_A_IND_IY_DD 3
 #define EMIT_SBC_A_IND_IY_DD(p,v) EMIT_16_8(p, O_SBC_A_IND_IY_DD, v)
 #define O_AND_IXH 0xA4DD
 #define L_AND_IXH 2
@@ -1254,10 +1254,10 @@
 #define L_AND_IYL 2
 #define EMIT_AND_IYL(p) EMIT_16(p, O_AND_IYL)
 #define O_AND_IND_IX_DD 0xA6DD
-#define L_AND_IND_IX_DD 2
+#define L_AND_IND_IX_DD 3
 #define EMIT_AND_IND_IX_DD(p,v) EMIT_16_8(p, O_AND_IND_IX_DD, v)
 #define O_AND_IND_IY_DD 0xA6FD
-#define L_AND_IND_IY_DD 2
+#define L_AND_IND_IY_DD 3
 #define EMIT_AND_IND_IY_DD(p,v) EMIT_16_8(p, O_AND_IND_IY_DD, v)
 #define O_XOR_IXH 0xACDD
 #define L_XOR_IXH 2
@@ -1272,10 +1272,10 @@
 #define L_XOR_IYL 2
 #define EMIT_XOR_IYL(p) EMIT_16(p, O_XOR_IYL)
 #define O_XOR_IND_IX_DD 0xAEDD
-#define L_XOR_IND_IX_DD 2
+#define L_XOR_IND_IX_DD 3
 #define EMIT_XOR_IND_IX_DD(p,v) EMIT_16_8(p, O_XOR_IND_IX_DD, v)
 #define O_XOR_IND_IY_DD 0xAEFD
-#define L_XOR_IND_IY_DD 2
+#define L_XOR_IND_IY_DD 3
 #define EMIT_XOR_IND_IY_DD(p,v) EMIT_16_8(p, O_XOR_IND_IY_DD, v)
 #define O_OR_IXH 0xB4DD
 #define L_OR_IXH 2
@@ -1290,10 +1290,10 @@
 #define L_OR_IYL 2
 #define EMIT_OR_IYL(p) EMIT_16(p, O_OR_IYL)
 #define O_OR_IND_IX_DD 0xB6DD
-#define L_OR_IND_IX_DD 2
+#define L_OR_IND_IX_DD 3
 #define EMIT_OR_IND_IX_DD(p,v) EMIT_16_8(p, O_OR_IND_IX_DD, v)
 #define O_OR_IND_IY_DD 0xB6FD
-#define L_OR_IND_IY_DD 2
+#define L_OR_IND_IY_DD 3
 #define EMIT_OR_IND_IY_DD(p,v) EMIT_16_8(p, O_OR_IND_IY_DD, v)
 #define O_CP_IXH 0xBCDD
 #define L_CP_IXH 2
@@ -1308,10 +1308,10 @@
 #define L_CP_IYL 2
 #define EMIT_CP_IYL(p) EMIT_16(p, O_CP_IYL)
 #define O_CP_IND_IX_DD 0xBEDD
-#define L_CP_IND_IX_DD 2
+#define L_CP_IND_IX_DD 3
 #define EMIT_CP_IND_IX_DD(p,v) EMIT_16_8(p, O_CP_IND_IX_DD, v)
 #define O_CP_IND_IY_DD 0xBEFD
-#define L_CP_IND_IY_DD 2
+#define L_CP_IND_IY_DD 3
 #define EMIT_CP_IND_IY_DD(p,v) EMIT_16_8(p, O_CP_IND_IY_DD, v)
 #define O_POP_IX 0xE1DD
 #define L_POP_IX 2
@@ -2088,202 +2088,202 @@
 #define L_SET_7_A 2
 #define EMIT_SET_7_A(p) EMIT_16(p, O_SET_7_A)
 #define O_RLC_IND_IX_DD 0x06CBDD
-#define L_RLC_IND_IX_DD 3
+#define L_RLC_IND_IX_DD 5
 #define EMIT_RLC_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RLC_IND_IX_DD, v, 0x6)
 #define O_RLC_IND_IY_DD 0x06CBFD
-#define L_RLC_IND_IY_DD 3
+#define L_RLC_IND_IY_DD 5
 #define EMIT_RLC_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RLC_IND_IY_DD, v, 0x6)
 #define O_RRC_IND_IX_DD 0x0ECBDD
-#define L_RRC_IND_IX_DD 3
+#define L_RRC_IND_IX_DD 5
 #define EMIT_RRC_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RRC_IND_IX_DD, v, 0xE)
 #define O_RRC_IND_IY_DD 0x0ECBFD
-#define L_RRC_IND_IY_DD 3
+#define L_RRC_IND_IY_DD 5
 #define EMIT_RRC_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RRC_IND_IY_DD, v, 0xE)
 #define O_RL_IND_IX_DD 0x16CBDD
-#define L_RL_IND_IX_DD 3
+#define L_RL_IND_IX_DD 5
 #define EMIT_RL_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RL_IND_IX_DD, v, 0x16)
 #define O_RL_IND_IY_DD 0x16CBFD
-#define L_RL_IND_IY_DD 3
+#define L_RL_IND_IY_DD 5
 #define EMIT_RL_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RL_IND_IY_DD, v, 0x16)
 #define O_RR_IND_IX_DD 0x1ECBDD
-#define L_RR_IND_IX_DD 3
+#define L_RR_IND_IX_DD 5
 #define EMIT_RR_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RR_IND_IX_DD, v, 0x1E)
 #define O_RR_IND_IY_DD 0x1ECBFD
-#define L_RR_IND_IY_DD 3
+#define L_RR_IND_IY_DD 5
 #define EMIT_RR_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RR_IND_IY_DD, v, 0x1E)
 #define O_SLA_IND_IX_DD 0x26CBDD
-#define L_SLA_IND_IX_DD 3
+#define L_SLA_IND_IX_DD 5
 #define EMIT_SLA_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SLA_IND_IX_DD, v, 0x26)
 #define O_SLA_IND_IY_DD 0x26CBFD
-#define L_SLA_IND_IY_DD 3
+#define L_SLA_IND_IY_DD 5
 #define EMIT_SLA_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SLA_IND_IY_DD, v, 0x26)
 #define O_SRA_IND_IX_DD 0x2ECBDD
-#define L_SRA_IND_IX_DD 3
+#define L_SRA_IND_IX_DD 5
 #define EMIT_SRA_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SRA_IND_IX_DD, v, 0x2E)
 #define O_SRA_IND_IY_DD 0x2ECBFD
-#define L_SRA_IND_IY_DD 3
+#define L_SRA_IND_IY_DD 5
 #define EMIT_SRA_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SRA_IND_IY_DD, v, 0x2E)
 #define O_SRL_IND_IX_DD 0x3ECBDD
-#define L_SRL_IND_IX_DD 3
+#define L_SRL_IND_IX_DD 5
 #define EMIT_SRL_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SRL_IND_IX_DD, v, 0x3E)
 #define O_SRL_IND_IY_DD 0x3ECBFD
-#define L_SRL_IND_IY_DD 3
+#define L_SRL_IND_IY_DD 5
 #define EMIT_SRL_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SRL_IND_IY_DD, v, 0x3E)
 #define O_BIT_0_IND_IX_DD 0x46CBDD
-#define L_BIT_0_IND_IX_DD 3
+#define L_BIT_0_IND_IX_DD 5
 #define EMIT_BIT_0_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_0_IND_IX_DD, v, 0x46)
 #define O_BIT_0_IND_IY_DD 0x46CBFD
-#define L_BIT_0_IND_IY_DD 3
+#define L_BIT_0_IND_IY_DD 5
 #define EMIT_BIT_0_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_0_IND_IY_DD, v, 0x46)
 #define O_BIT_1_IND_IX_DD 0x4ECBDD
-#define L_BIT_1_IND_IX_DD 3
+#define L_BIT_1_IND_IX_DD 5
 #define EMIT_BIT_1_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_1_IND_IX_DD, v, 0x4E)
 #define O_BIT_1_IND_IY_DD 0x4ECBFD
-#define L_BIT_1_IND_IY_DD 3
+#define L_BIT_1_IND_IY_DD 5
 #define EMIT_BIT_1_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_1_IND_IY_DD, v, 0x4E)
 #define O_BIT_2_IND_IX_DD 0x56CBDD
-#define L_BIT_2_IND_IX_DD 3
+#define L_BIT_2_IND_IX_DD 5
 #define EMIT_BIT_2_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_2_IND_IX_DD, v, 0x56)
 #define O_BIT_2_IND_IY_DD 0x56CBFD
-#define L_BIT_2_IND_IY_DD 3
+#define L_BIT_2_IND_IY_DD 5
 #define EMIT_BIT_2_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_2_IND_IY_DD, v, 0x56)
 #define O_BIT_3_IND_IX_DD 0x5ECBDD
-#define L_BIT_3_IND_IX_DD 3
+#define L_BIT_3_IND_IX_DD 5
 #define EMIT_BIT_3_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_3_IND_IX_DD, v, 0x5E)
 #define O_BIT_3_IND_IY_DD 0x5ECBFD
-#define L_BIT_3_IND_IY_DD 3
+#define L_BIT_3_IND_IY_DD 5
 #define EMIT_BIT_3_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_3_IND_IY_DD, v, 0x5E)
 #define O_BIT_4_IND_IX_DD 0x66CBDD
-#define L_BIT_4_IND_IX_DD 3
+#define L_BIT_4_IND_IX_DD 5
 #define EMIT_BIT_4_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_4_IND_IX_DD, v, 0x66)
 #define O_BIT_4_IND_IY_DD 0x66CBFD
-#define L_BIT_4_IND_IY_DD 3
+#define L_BIT_4_IND_IY_DD 5
 #define EMIT_BIT_4_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_4_IND_IY_DD, v, 0x66)
 #define O_BIT_5_IND_IX_DD 0x6ECBDD
-#define L_BIT_5_IND_IX_DD 3
+#define L_BIT_5_IND_IX_DD 5
 #define EMIT_BIT_5_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_5_IND_IX_DD, v, 0x6E)
 #define O_BIT_5_IND_IY_DD 0x6ECBFD
-#define L_BIT_5_IND_IY_DD 3
+#define L_BIT_5_IND_IY_DD 5
 #define EMIT_BIT_5_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_5_IND_IY_DD, v, 0x6E)
 #define O_BIT_6_IND_IX_DD 0x76CBDD
-#define L_BIT_6_IND_IX_DD 3
+#define L_BIT_6_IND_IX_DD 5
 #define EMIT_BIT_6_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_6_IND_IX_DD, v, 0x76)
 #define O_BIT_6_IND_IY_DD 0x76CBFD
-#define L_BIT_6_IND_IY_DD 3
+#define L_BIT_6_IND_IY_DD 5
 #define EMIT_BIT_6_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_6_IND_IY_DD, v, 0x76)
 #define O_BIT_7_IND_IX_DD 0x7ECBDD
-#define L_BIT_7_IND_IX_DD 3
+#define L_BIT_7_IND_IX_DD 5
 #define EMIT_BIT_7_IND_IX_DD(p,v) EMIT_16_8_8(p, O_BIT_7_IND_IX_DD, v, 0x7E)
 #define O_BIT_7_IND_IY_DD 0x7ECBFD
-#define L_BIT_7_IND_IY_DD 3
+#define L_BIT_7_IND_IY_DD 5
 #define EMIT_BIT_7_IND_IY_DD(p,v) EMIT_16_8_8(p, O_BIT_7_IND_IY_DD, v, 0x7E)
 #define O_RES_0_IND_IX_DD 0x86CBDD
-#define L_RES_0_IND_IX_DD 3
+#define L_RES_0_IND_IX_DD 5
 #define EMIT_RES_0_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_0_IND_IX_DD, v, 0x86)
 #define O_RES_0_IND_IY_DD 0x86CBFD
-#define L_RES_0_IND_IY_DD 3
+#define L_RES_0_IND_IY_DD 5
 #define EMIT_RES_0_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_0_IND_IY_DD, v, 0x86)
 #define O_RES_1_IND_IX_DD 0x8ECBDD
-#define L_RES_1_IND_IX_DD 3
+#define L_RES_1_IND_IX_DD 5
 #define EMIT_RES_1_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_1_IND_IX_DD, v, 0x8E)
 #define O_RES_1_IND_IY_DD 0x8ECBFD
-#define L_RES_1_IND_IY_DD 3
+#define L_RES_1_IND_IY_DD 5
 #define EMIT_RES_1_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_1_IND_IY_DD, v, 0x8E)
 #define O_RES_2_IND_IX_DD 0x96CBDD
-#define L_RES_2_IND_IX_DD 3
+#define L_RES_2_IND_IX_DD 5
 #define EMIT_RES_2_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_2_IND_IX_DD, v, 0x96)
 #define O_RES_2_IND_IY_DD 0x96CBFD
-#define L_RES_2_IND_IY_DD 3
+#define L_RES_2_IND_IY_DD 5
 #define EMIT_RES_2_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_2_IND_IY_DD, v, 0x96)
 #define O_RES_3_IND_IX_DD 0x9ECBDD
-#define L_RES_3_IND_IX_DD 3
+#define L_RES_3_IND_IX_DD 5
 #define EMIT_RES_3_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_3_IND_IX_DD, v, 0x9E)
 #define O_RES_3_IND_IY_DD 0x9ECBFD
-#define L_RES_3_IND_IY_DD 3
+#define L_RES_3_IND_IY_DD 5
 #define EMIT_RES_3_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_3_IND_IY_DD, v, 0x9E)
 #define O_RES_4_IND_IX_DD 0xA6CBDD
-#define L_RES_4_IND_IX_DD 3
+#define L_RES_4_IND_IX_DD 5
 #define EMIT_RES_4_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_4_IND_IX_DD, v, 0xA6)
 #define O_RES_4_IND_IY_DD 0xA6CBFD
-#define L_RES_4_IND_IY_DD 3
+#define L_RES_4_IND_IY_DD 5
 #define EMIT_RES_4_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_4_IND_IY_DD, v, 0xA6)
 #define O_RES_5_IND_IX_DD 0xAECBDD
-#define L_RES_5_IND_IX_DD 3
+#define L_RES_5_IND_IX_DD 5
 #define EMIT_RES_5_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_5_IND_IX_DD, v, 0xAE)
 #define O_RES_5_IND_IY_DD 0xAECBFD
-#define L_RES_5_IND_IY_DD 3
+#define L_RES_5_IND_IY_DD 5
 #define EMIT_RES_5_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_5_IND_IY_DD, v, 0xAE)
 #define O_RES_6_IND_IX_DD 0xB6CBDD
-#define L_RES_6_IND_IX_DD 3
+#define L_RES_6_IND_IX_DD 5
 #define EMIT_RES_6_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_6_IND_IX_DD, v, 0xB6)
 #define O_RES_6_IND_IY_DD 0xB6CBFD
-#define L_RES_6_IND_IY_DD 3
+#define L_RES_6_IND_IY_DD 5
 #define EMIT_RES_6_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_6_IND_IY_DD, v, 0xB6)
 #define O_RES_7_IND_IX_DD 0xBECBDD
-#define L_RES_7_IND_IX_DD 3
+#define L_RES_7_IND_IX_DD 5
 #define EMIT_RES_7_IND_IX_DD(p,v) EMIT_16_8_8(p, O_RES_7_IND_IX_DD, v, 0xBE)
 #define O_RES_7_IND_IY_DD 0xBECBFD
-#define L_RES_7_IND_IY_DD 3
+#define L_RES_7_IND_IY_DD 5
 #define EMIT_RES_7_IND_IY_DD(p,v) EMIT_16_8_8(p, O_RES_7_IND_IY_DD, v, 0xBE)
 #define O_SET_0_IND_IX_DD 0xC6CBDD
-#define L_SET_0_IND_IX_DD 3
+#define L_SET_0_IND_IX_DD 5
 #define EMIT_SET_0_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_0_IND_IX_DD, v, 0xC6)
 #define O_SET_0_IND_IY_DD 0xC6CBFD
-#define L_SET_0_IND_IY_DD 3
+#define L_SET_0_IND_IY_DD 5
 #define EMIT_SET_0_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_0_IND_IY_DD, v, 0xC6)
 #define O_SET_1_IND_IX_DD 0xCECBDD
-#define L_SET_1_IND_IX_DD 3
+#define L_SET_1_IND_IX_DD 5
 #define EMIT_SET_1_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_1_IND_IX_DD, v, 0xCE)
 #define O_SET_1_IND_IY_DD 0xCECBFD
-#define L_SET_1_IND_IY_DD 3
+#define L_SET_1_IND_IY_DD 5
 #define EMIT_SET_1_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_1_IND_IY_DD, v, 0xCE)
 #define O_SET_2_IND_IX_DD 0xD6CBDD
-#define L_SET_2_IND_IX_DD 3
+#define L_SET_2_IND_IX_DD 5
 #define EMIT_SET_2_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_2_IND_IX_DD, v, 0xD6)
 #define O_SET_2_IND_IY_DD 0xD6CBFD
-#define L_SET_2_IND_IY_DD 3
+#define L_SET_2_IND_IY_DD 5
 #define EMIT_SET_2_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_2_IND_IY_DD, v, 0xD6)
 #define O_SET_3_IND_IX_DD 0xDECBDD
-#define L_SET_3_IND_IX_DD 3
+#define L_SET_3_IND_IX_DD 5
 #define EMIT_SET_3_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_3_IND_IX_DD, v, 0xDE)
 #define O_SET_3_IND_IY_DD 0xDECBFD
-#define L_SET_3_IND_IY_DD 3
+#define L_SET_3_IND_IY_DD 5
 #define EMIT_SET_3_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_3_IND_IY_DD, v, 0xDE)
 #define O_SET_4_IND_IX_DD 0xE6CBDD
-#define L_SET_4_IND_IX_DD 3
+#define L_SET_4_IND_IX_DD 5
 #define EMIT_SET_4_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_4_IND_IX_DD, v, 0xE6)
 #define O_SET_4_IND_IY_DD 0xE6CBFD
-#define L_SET_4_IND_IY_DD 3
+#define L_SET_4_IND_IY_DD 5
 #define EMIT_SET_4_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_4_IND_IY_DD, v, 0xE6)
 #define O_SET_5_IND_IX_DD 0xEECBDD
-#define L_SET_5_IND_IX_DD 3
+#define L_SET_5_IND_IX_DD 5
 #define EMIT_SET_5_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_5_IND_IX_DD, v, 0xEE)
 #define O_SET_5_IND_IY_DD 0xEECBFD
-#define L_SET_5_IND_IY_DD 3
+#define L_SET_5_IND_IY_DD 5
 #define EMIT_SET_5_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_5_IND_IY_DD, v, 0xEE)
 #define O_SET_6_IND_IX_DD 0xF6CBDD
-#define L_SET_6_IND_IX_DD 3
+#define L_SET_6_IND_IX_DD 5
 #define EMIT_SET_6_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_6_IND_IX_DD, v, 0xF6)
 #define O_SET_6_IND_IY_DD 0xF6CBFD
-#define L_SET_6_IND_IY_DD 3
+#define L_SET_6_IND_IY_DD 5
 #define EMIT_SET_6_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_6_IND_IY_DD, v, 0xF6)
 #define O_SET_7_IND_IX_DD 0xFECBDD
-#define L_SET_7_IND_IX_DD 3
+#define L_SET_7_IND_IX_DD 5
 #define EMIT_SET_7_IND_IX_DD(p,v) EMIT_16_8_8(p, O_SET_7_IND_IX_DD, v, 0xFE)
 #define O_SET_7_IND_IY_DD 0xFECBFD
-#define L_SET_7_IND_IY_DD 3
+#define L_SET_7_IND_IY_DD 5
 #define EMIT_SET_7_IND_IY_DD(p,v) EMIT_16_8_8(p, O_SET_7_IND_IY_DD, v, 0xFE)
 #define O_IN0_B_IND_IMM 0xED
-#define L_IN0_B_IND_IMM 1
+#define L_IN0_B_IND_IMM 2
 #define EMIT_IN0_B_IND_IMM(p,v) EMIT_8_8(p, O_IN0_B_IND_IMM, v)
 #define O_OUT0_IND_IMM_B 0x01ED
-#define L_OUT0_IND_IMM_B 2
+#define L_OUT0_IND_IMM_B 3
 #define EMIT_OUT0_IND_IMM_B(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_B, v)
 #define O_LEA_BC_IX_DD 0x02ED
-#define L_LEA_BC_IX_DD 2
+#define L_LEA_BC_IX_DD 3
 #define EMIT_LEA_BC_IX_DD(p,v) EMIT_16_8(p, O_LEA_BC_IX_DD, v)
 #define O_LEA_BC_IY_DD 0x03ED
-#define L_LEA_BC_IY_DD 2
+#define L_LEA_BC_IY_DD 3
 #define EMIT_LEA_BC_IY_DD(p,v) EMIT_16_8(p, O_LEA_BC_IY_DD, v)
 #define O_TST_A_B 0x04ED
 #define L_TST_A_B 2
@@ -2292,10 +2292,10 @@
 #define L_LD_BC_IND_HL 2
 #define EMIT_LD_BC_IND_HL(p) EMIT_16(p, O_LD_BC_IND_HL)
 #define O_IN0_C_IND_IMM 0x08ED
-#define L_IN0_C_IND_IMM 2
+#define L_IN0_C_IND_IMM 3
 #define EMIT_IN0_C_IND_IMM(p,v) EMIT_16_8(p, O_IN0_C_IND_IMM, v)
 #define O_OUT0_IND_IMM_C 0x09ED
-#define L_OUT0_IND_IMM_C 2
+#define L_OUT0_IND_IMM_C 3
 #define EMIT_OUT0_IND_IMM_C(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_C, v)
 #define O_TST_A_C 0x0CED
 #define L_TST_A_C 2
@@ -2304,16 +2304,16 @@
 #define L_LD_IND_HL_BC 2
 #define EMIT_LD_IND_HL_BC(p) EMIT_16(p, O_LD_IND_HL_BC)
 #define O_IN0_D_IND_IMM 0x10ED
-#define L_IN0_D_IND_IMM 2
+#define L_IN0_D_IND_IMM 3
 #define EMIT_IN0_D_IND_IMM(p,v) EMIT_16_8(p, O_IN0_D_IND_IMM, v)
 #define O_OUT0_IND_IMM_D 0x11ED
-#define L_OUT0_IND_IMM_D 2
+#define L_OUT0_IND_IMM_D 3
 #define EMIT_OUT0_IND_IMM_D(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_D, v)
 #define O_LEA_DE_IX_DD 0x12ED
-#define L_LEA_DE_IX_DD 2
+#define L_LEA_DE_IX_DD 3
 #define EMIT_LEA_DE_IX_DD(p,v) EMIT_16_8(p, O_LEA_DE_IX_DD, v)
 #define O_LEA_DE_IY_DD 0x13ED
-#define L_LEA_DE_IY_DD 2
+#define L_LEA_DE_IY_DD 3
 #define EMIT_LEA_DE_IY_DD(p,v) EMIT_16_8(p, O_LEA_DE_IY_DD, v)
 #define O_TST_A_D 0x14ED
 #define L_TST_A_D 2
@@ -2322,10 +2322,10 @@
 #define L_LD_DE_IND_HL 2
 #define EMIT_LD_DE_IND_HL(p) EMIT_16(p, O_LD_DE_IND_HL)
 #define O_IN0_E_IND_IMM 0x18ED
-#define L_IN0_E_IND_IMM 2
+#define L_IN0_E_IND_IMM 3
 #define EMIT_IN0_E_IND_IMM(p,v) EMIT_16_8(p, O_IN0_E_IND_IMM, v)
 #define O_OUT0_IND_IMM_E 0x19ED
-#define L_OUT0_IND_IMM_E 2
+#define L_OUT0_IND_IMM_E 3
 #define EMIT_OUT0_IND_IMM_E(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_E, v)
 #define O_TST_A_E 0x1CED
 #define L_TST_A_E 2
@@ -2334,16 +2334,16 @@
 #define L_LD_IND_HL_DE 2
 #define EMIT_LD_IND_HL_DE(p) EMIT_16(p, O_LD_IND_HL_DE)
 #define O_IN0_H_IND_IMM 0x20ED
-#define L_IN0_H_IND_IMM 2
+#define L_IN0_H_IND_IMM 3
 #define EMIT_IN0_H_IND_IMM(p,v) EMIT_16_8(p, O_IN0_H_IND_IMM, v)
 #define O_OUT0_IND_IMM_H 0x21ED
-#define L_OUT0_IND_IMM_H 2
+#define L_OUT0_IND_IMM_H 3
 #define EMIT_OUT0_IND_IMM_H(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_H, v)
 #define O_LEA_HL_IX_DD 0x22ED
-#define L_LEA_HL_IX_DD 2
+#define L_LEA_HL_IX_DD 3
 #define EMIT_LEA_HL_IX_DD(p,v) EMIT_16_8(p, O_LEA_HL_IX_DD, v)
 #define O_LEA_HL_IY_DD 0x23ED
-#define L_LEA_HL_IY_DD 2
+#define L_LEA_HL_IY_DD 3
 #define EMIT_LEA_HL_IY_DD(p,v) EMIT_16_8(p, O_LEA_HL_IY_DD, v)
 #define O_TST_A_H 0x24ED
 #define L_TST_A_H 2
@@ -2352,10 +2352,10 @@
 #define L_LD_HL_IND_HL 2
 #define EMIT_LD_HL_IND_HL(p) EMIT_16(p, O_LD_HL_IND_HL)
 #define O_IN0_L_IND_IMM 0x28ED
-#define L_IN0_L_IND_IMM 2
+#define L_IN0_L_IND_IMM 3
 #define EMIT_IN0_L_IND_IMM(p,v) EMIT_16_8(p, O_IN0_L_IND_IMM, v)
 #define O_OUT0_IND_IMM_L 0x29ED
-#define L_OUT0_IND_IMM_L 2
+#define L_OUT0_IND_IMM_L 3
 #define EMIT_OUT0_IND_IMM_L(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_L, v)
 #define O_TST_A_L 0x2CED
 #define L_TST_A_L 2
@@ -2364,10 +2364,10 @@
 #define L_LD_IND_HL_HL 2
 #define EMIT_LD_IND_HL_HL(p) EMIT_16(p, O_LD_IND_HL_HL)
 #define O_LEA_IX_IX_DD 0x32ED
-#define L_LEA_IX_IX_DD 2
+#define L_LEA_IX_IX_DD 3
 #define EMIT_LEA_IX_IX_DD(p,v) EMIT_16_8(p, O_LEA_IX_IX_DD, v)
 #define O_LEA_IY_IY_DD 0x33ED
-#define L_LEA_IY_IY_DD 2
+#define L_LEA_IY_IY_DD 3
 #define EMIT_LEA_IY_IY_DD(p,v) EMIT_16_8(p, O_LEA_IY_IY_DD, v)
 #define O_TST_A_IND_HL 0x34ED
 #define L_TST_A_IND_HL 2
@@ -2379,10 +2379,10 @@
 #define L_LD_IX_IND_HL 2
 #define EMIT_LD_IX_IND_HL(p) EMIT_16(p, O_LD_IX_IND_HL)
 #define O_IN0_A_IND_IMM 0x38ED
-#define L_IN0_A_IND_IMM 2
+#define L_IN0_A_IND_IMM 3
 #define EMIT_IN0_A_IND_IMM(p,v) EMIT_16_8(p, O_IN0_A_IND_IMM, v)
 #define O_OUT0_IND_IMM_A 0x39ED
-#define L_OUT0_IND_IMM_A 2
+#define L_OUT0_IND_IMM_A 3
 #define EMIT_OUT0_IND_IMM_A(p,v) EMIT_16_8(p, O_OUT0_IND_IMM_A, v)
 #define O_TST_A_A 0x3CED
 #define L_TST_A_A 2
@@ -2403,7 +2403,7 @@
 #define L_SBC_HL_BC 2
 #define EMIT_SBC_HL_BC(p) EMIT_16(p, O_SBC_HL_BC)
 #define O_LD_IND_IMM_BC 0x43ED
-#define L_LD_IND_IMM_BC 2
+#define L_LD_IND_IMM_BC 4
 #define EMIT_LD_IND_IMM_BC(p,v) EMIT_16_24(p, O_LD_IND_IMM_BC, v)
 #define O_NEG 0x44ED
 #define L_NEG 2
@@ -2427,7 +2427,7 @@
 #define L_ADC_HL_BC 2
 #define EMIT_ADC_HL_BC(p) EMIT_16(p, O_ADC_HL_BC)
 #define O_LD_BC_IND_IMM 0x4BED
-#define L_LD_BC_IND_IMM 2
+#define L_LD_BC_IND_IMM 4
 #define EMIT_LD_BC_IND_IMM(p,v) EMIT_16_24(p, O_LD_BC_IND_IMM, v)
 #define O_MLT_BC 0x4CED
 #define L_MLT_BC 2
@@ -2448,13 +2448,13 @@
 #define L_SBC_HL_DE 2
 #define EMIT_SBC_HL_DE(p) EMIT_16(p, O_SBC_HL_DE)
 #define O_LD_IND_IMM_DE 0x53ED
-#define L_LD_IND_IMM_DE 2
+#define L_LD_IND_IMM_DE 4
 #define EMIT_LD_IND_IMM_DE(p,v) EMIT_16_24(p, O_LD_IND_IMM_DE, v)
 #define O_LEA_IX_IY_DD 0x54ED
-#define L_LEA_IX_IY_DD 2
+#define L_LEA_IX_IY_DD 3
 #define EMIT_LEA_IX_IY_DD(p,v) EMIT_16_8(p, O_LEA_IX_IY_DD, v)
 #define O_LEA_IY_IX_DD 0x55ED
-#define L_LEA_IY_IX_DD 2
+#define L_LEA_IY_IX_DD 3
 #define EMIT_LEA_IY_IX_DD(p,v) EMIT_16_8(p, O_LEA_IY_IX_DD, v)
 #define O_IM_1 0x56ED
 #define L_IM_1 2
@@ -2472,7 +2472,7 @@
 #define L_ADC_HL_DE 2
 #define EMIT_ADC_HL_DE(p) EMIT_16(p, O_ADC_HL_DE)
 #define O_LD_DE_IND_IMM 0x5BED
-#define L_LD_DE_IND_IMM 2
+#define L_LD_DE_IND_IMM 4
 #define EMIT_LD_DE_IND_IMM(p,v) EMIT_16_24(p, O_LD_DE_IND_IMM, v)
 #define O_MLT_DE 0x5CED
 #define L_MLT_DE 2
@@ -2493,13 +2493,13 @@
 #define L_SBC_HL_HL 2
 #define EMIT_SBC_HL_HL(p) EMIT_16(p, O_SBC_HL_HL)
 #define O_TST_A_IMM 0x64ED
-#define L_TST_A_IMM 2
+#define L_TST_A_IMM 3
 #define EMIT_TST_A_IMM(p,v) EMIT_16_8(p, O_TST_A_IMM, v)
 #define O_PEA_IX_DD 0x65ED
-#define L_PEA_IX_DD 2
+#define L_PEA_IX_DD 3
 #define EMIT_PEA_IX_DD(p,v) EMIT_16_8(p, O_PEA_IX_DD, v)
 #define O_PEA_IY_DD 0x66ED
-#define L_PEA_IY_DD 2
+#define L_PEA_IY_DD 3
 #define EMIT_PEA_IY_DD(p,v) EMIT_16_8(p, O_PEA_IY_DD, v)
 #define O_RRD 0x67ED
 #define L_RRD 2
@@ -2529,10 +2529,10 @@
 #define L_SBC_HL_SP 2
 #define EMIT_SBC_HL_SP(p) EMIT_16(p, O_SBC_HL_SP)
 #define O_LD_IND_IMM_SP 0x73ED
-#define L_LD_IND_IMM_SP 2
+#define L_LD_IND_IMM_SP 4
 #define EMIT_LD_IND_IMM_SP(p,v) EMIT_16_24(p, O_LD_IND_IMM_SP, v)
 #define O_TSTIO_IMM 0x74ED
-#define L_TSTIO_IMM 2
+#define L_TSTIO_IMM 3
 #define EMIT_TSTIO_IMM(p,v) EMIT_16_8(p, O_TSTIO_IMM, v)
 #define O_SLP 0x76ED
 #define L_SLP 2
@@ -2547,7 +2547,7 @@
 #define L_ADC_HL_SP 2
 #define EMIT_ADC_HL_SP(p) EMIT_16(p, O_ADC_HL_SP)
 #define O_LD_SP_IND_IMM 0x7BED
-#define L_LD_SP_IND_IMM 2
+#define L_LD_SP_IND_IMM 4
 #define EMIT_LD_SP_IND_IMM(p,v) EMIT_16_24(p, O_LD_SP_IND_IMM, v)
 #define O_MLT_SP 0x7CED
 #define L_MLT_SP 2
