@@ -62,8 +62,8 @@ data = """
 3B DEC  SP          -                SRL  E           -                -
 3C INC  A           -                SRL  H           -                TST  A,A
 3D DEC  A           -                SRL  L           -                -
-3E LD   A,&00       LD   (IX+d),IY   SRL  (HL)        SRL (IY+d)       LD  (HL),IY
-3F CCF              LD   (IX+d),IX   SRL  A           -                LD  (HL),IX
+3E LD   A,&00       LD   (IX+d), IY  SRL  (HL)        SRL (IY+d)       LD  (HL), IY
+3F CCF              LD   (IX+d), IX  SRL  A           -                LD  (HL), IX
 40 .SIS suffix      -                BIT  0,B         -                IN   B,(BC)
 41 LD   B,C         -                BIT  0,C         -                OUT  (BC),B
 42 LD   B,D         -                BIT  0,D         -                SBC  HL,BC
@@ -267,9 +267,9 @@ with open("ez80.h","w") as f:
 		if len(line):
 			tbl[0].append((line[3:20], N))
 			tbl[1].append((line[20:36], N*0x100+0xDD))
-			tbl[1].append((line[20:36].replace("(IX","(IY").replace("IXL","IYL").replace("IXH","IYH"), N*0x100+0xFD))
+			tbl[1].append((line[20:36].replace("(IX","(IY").replace(",IX",",IY"), N*0x100+0xFD))
 			tbl[2].append((line[37:54], N*0x100+0xCB))
-			tbl[3].append((line[54:71].replace("(IY","(IX").replace("IYL","IXL").replace("IYH","IXH"), N*0x10000+0xCBDD))
+			tbl[3].append((line[54:71].replace("(IY","(IX"), N*0x10000+0xCBDD))
 			tbl[3].append((line[54:71], N*0x10000+0xCBFD))
 			tbl[4].append((line[71:], N*0x100+0xED))
 			N+=1
