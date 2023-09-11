@@ -266,7 +266,7 @@ with open("ez80.h","w") as f:
 	for line in data.splitlines():
 		if len(line):
 			tbl[0].append((line[3:20], N))
-			tbl[1].append((line[20:36], N*0x100+0xDD))
+			tbl[1].append((line[20:36].replace("_IX","IX"), N*0x100+0xDD))
 			tbl[1].append((line[20:36].replace("_IX","IY"), N*0x100+0xFD))
 			tbl[2].append((line[37:54], N*0x100+0xCB))
 			tbl[3].append((line[54:71].replace("IY","IX"), N*0x10000+0xCBDD))
