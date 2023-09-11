@@ -16,7 +16,7 @@ data = """
 0D DEC  C           -                RRC  L           -                -
 0E LD   C,&00       -                RRC  (HL)        RRC (IY+d)       -
 0F RRCA             LD   (IX+d),BC   RRC  A           -                LD   (HL),BC
-10 DJNZ +d          -                RL   B           -                IN0  D,(&00)
+10 DJNZ &00         -                RL   B           -                IN0  D,(&00)
 11 LD   DE,&0000    -                RL   C           -                OUT0 (&00),D
 12 LD   (DE),A      -                RL   D           -                LEA  DE,IX+d
 13 INC  DE          -                RL   E           -                LEA  DE,IY+d
@@ -260,7 +260,7 @@ FF RST  &38         -                SET  7,A         -                -
 
 HEX="0123456789ABCDEF"
 with open("ez80.h","w") as f:
-	f.write("#ifndef __EZ80_H__\n#define __EZ80_H__\n// eZ80 opcode defines. Generated from http://mdfs.net/Docs.Comp.eZ80.OpList\n// Opcode values are defined little-endian.\n// Opcodes are uppercase with underscores for spaces, IND for indirects, IMM for immediates, DD for displacements, etc.\n// Each opcode has an accompanying define for how long (in bytes) the opcode is.\n// A macro is defined for emitting each opcode to a pointer.\n\n#define EMIT_8(p,o) (*(uint8_t*)(p)++ = (o))\n#define EMIT_16(p,o) (*(uint16_t*)(p)++ = (o))\n#define EMIT_24(p,o) (*(uint24_t*)(p)++ = (o))\n#define EMIT_32(p,o) (*(uint32_t*)(p)++ = (o))\n#define EMIT_8_8(p,o,v) EMIT_16(p,(o)|((v)<<8))\n#define EMIT_16_8(p,o,v) EMIT_24(p,(o)|((v)<<16))\n#define EMIT_8_24(p,o,v) EMIT_32(p,(o)|((v)<<8))\n#define EMIT_8_8_8(p,o,d,v) EMIT_24(p,(o)|((d)<<8)|((v)<<16))\n#define EMIT_16_8_8(p,o,d,v) EMIT_32(p,(o)|((d)<<16)|((v)<<24))\n#define EMIT_16_24(p,o,v) {EMIT_16(p,o); EMIT_24(p,v);}\n\n")
+	f.write("#ifndef __EZ80_H__\n#define __EZ80_H__\n// eZ80 opcode defines. Generated from http://mdfs.net/Docs.Comp.eZ80.OpList\n// Opcode values are defined little-endian.\n// Opcodes are uppercase with underscores for spaces, IND for indirects, IMM for immediates, DD for displacements, etc.\n// Each opcode has an accompanying define for how long (in bytes) the opcode (including arguments) is.\n// A macro is defined for emitting each opcode to a pointer.\n\n#define EMIT_8(p,o) (*(uint8_t*)(p)++ = (o))\n#define EMIT_16(p,o) (*(uint16_t*)(p)++ = (o))\n#define EMIT_24(p,o) (*(uint24_t*)(p)++ = (o))\n#define EMIT_32(p,o) (*(uint32_t*)(p)++ = (o))\n#define EMIT_8_8(p,o,v) EMIT_16(p,(o)|((v)<<8))\n#define EMIT_16_8(p,o,v) EMIT_24(p,(o)|((v)<<16))\n#define EMIT_8_24(p,o,v) EMIT_32(p,(o)|((v)<<8))\n#define EMIT_8_8_8(p,o,d,v) EMIT_24(p,(o)|((d)<<8)|((v)<<16))\n#define EMIT_16_8_8(p,o,d,v) EMIT_32(p,(o)|((d)<<16)|((v)<<24))\n#define EMIT_16_24(p,o,v) {EMIT_16(p,o); EMIT_24(p,v);}\n\n")
 	N=0
 	tbl = [[],[],[],[],[]]
 	for line in data.splitlines():
@@ -285,17 +285,20 @@ with open("ez80.h","w") as f:
 				v = hex(n)[2:].rjust((len(hex(n)[2:])+(len(hex(n)[2:])&1)), '0').upper()
 				f.write(f"#define O_{s} 0x{v}\n")
 				if "CBFD" in v or "CBDD" in v:
-					f.write(f"#define L_{s} {len(v)//2}\n")
+					f.write(f"#define L_{s} {len(v)//2+2}\n")
 					f.write(f"#define EMIT_{s}(p,v) EMIT_{8*(len(v)//2-1)}_8_8(p, O_{s}, v, 0x{hex(n//65536)[2:].upper()})\n")
 				else:
-					f.write(f"#define L_{s} {len(v)//2}\n")
 					if "&0000" in l:
+						f.write(f"#define L_{s} {len(v)//2+2}\n")
 						f.write(f"#define EMIT_{s}(p,v) EMIT_{8*len(v)//2}_24(p, O_{s}, v)\n")
 					elif "&00" in l and "+D" in l:
+						f.write(f"#define L_{s} {len(v)//2+2}\n")
 						f.write(f"#define EMIT_{s}(p,d,v) EMIT_{8*len(v)//2}_8_8(p, O_{s}, d, v)\n")
 					elif "&00" in l or "+D" in l:
+						f.write(f"#define L_{s} {len(v)//2+1}\n")
 						f.write(f"#define EMIT_{s}(p,v) EMIT_{8*len(v)//2}_8(p, O_{s}, v)\n")
 					else:
+						f.write(f"#define L_{s} {len(v)//2}\n")
 						f.write(f"#define EMIT_{s}(p) EMIT_{8*len(v)//2}(p, O_{s})\n")
 
 	f.write("#endif")
