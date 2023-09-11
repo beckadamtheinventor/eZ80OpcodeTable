@@ -281,7 +281,7 @@ with open("ez80.h","w") as f:
 				if "RST" in l:
 					s = l.replace('&','')
 				else:
-					s = l.replace('(HL)','IND_HL').replace('(DE)','IND_DE').replace('(BC)','IND_BC').replace('(SP)','IND_SP').replace('(IX)','IND_IX').replace('(IY)','IND_IY').replace('&0000','IMM').replace('&00','IMM').replace('+D','_DD').replace('(IMM)','IND_IMM').replace('(IX_DD)','IND_IX_DD').replace('(IY_DD)','IND_IY_DD')
+					s = l.replace('(HL)','IND_HL').replace('(DE)','IND_DE').replace('(BC)','IND_BC').replace('(SP)','IND_SP').replace('(IX)','IND_IX').replace('(IY)','IND_IY').replace('&0000','IMM').replace('&00','IMM').replace('+D','_DD').replace('(IMM)','IND_IMM').replace('(IX_DD)','IND_IX_DD').replace('(IY_DD)','IND_IY_DD').replace("__","_")
 				v = hex(n)[2:].rjust((len(hex(n)[2:])+(len(hex(n)[2:])&1)), '0').upper()
 				f.write(f"#define O_{s} 0x{v}\n")
 				if "CBFD" in v or "CBDD" in v:
