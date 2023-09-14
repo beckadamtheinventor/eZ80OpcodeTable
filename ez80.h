@@ -9,7 +9,7 @@
 #define EMIT_8(p,o) (*(uint8_t*)(p)++ = (o))
 #define EMIT_16(p,o) {*(uint16_t*)(p) = (o); (p) += 2;}
 #ifndef uint24_t
-#define EMIT_24(p,o) {EMIT_16(p,o); EMIT_8(p,(o)>>16);}
+#define EMIT_24(p,o) {EMIT_8(p,(o)&0xff); EMIT_8(p, ((o)>>8)&0xff); EMIT_8(p,((o)>>16)&0xff);}
 #else
 #define EMIT_24(p,o) {*(uint24_t*)(p) = (o); (p) += 3;}
 #endif
