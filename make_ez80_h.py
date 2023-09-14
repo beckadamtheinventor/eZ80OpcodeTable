@@ -289,7 +289,7 @@ with open("ez80.h","w") as f:
 					f.write(f"#define EMIT_{s}(p,v) EMIT_{8*(len(v)//2-1)}_8_8(p, O_{s}, v, 0x{hex(n//65536)[2:].upper()})\n")
 				else:
 					if "&0000" in l:
-						f.write(f"#define L_{s} {len(v)//2+2}\n")
+						f.write(f"#define L_{s} {len(v)//2+3}\n")
 						f.write(f"#define EMIT_{s}(p,v) EMIT_{8*len(v)//2}_24(p, O_{s}, v)\n")
 					elif "&00" in l and "+D" in l:
 						f.write(f"#define L_{s} {len(v)//2+2}\n")
