@@ -349,22 +349,32 @@ with open("ti84pceg.h", "w") as f:
 				valuel, valuer = value.split("shl", maxsplit=1)
 				valuel = valuel.strip(" \t")
 				valuer = valuer.strip(" \t")
-				if not valuel[0].isdigit():
+				if valuel.endswith("h"):
+					valuel = "0x" + valuel[:-1].upper()
+				elif not valuel[0].isdigit():
 					valuel = "TI_"+valuel
 				if valuer[0].isdigit():
 					f.write(f"#define TI_{name} ({valuel} << {valuer})")
 				else:
 					f.write(f"#define TI_{name} ({valuel} << TI_{valuer})")
+			elif "+" in value:
+				valuel, valuer = value.split("+", maxsplit=1)
+				valuel = valuel.strip(" \t")
+				valuer = valuer.strip(" \t")
+				if valuel.endswith("h"):
+					valuel = "0x" + valuel[:-1].upper()
+				elif not valuel[0].isdigit():
+					valuel = "TI_"+valuel
+				if valuer.endswith("h"):
+					valuer = "0x" + valuer[:-1].upper()
+				elif not valuer[0].isdigit():
+					valuer = "TI_"+valuer
+				f.write(f"#define TI_{name} ({valuel} + {valuer})")
 			else:
-				while value[i].upper() in HEX:
-					valnum = valnum * 16 + HEX.find(value[i].upper())
-					i += 1
-					if i >= len(value):
-						break
 				if value.endswith("h"):
-					f.write(f"#define TI_{name} {hex(valnum)}")
+					f.write(f"#define TI_{name} 0x{value[:-1].upper()}")
 				else:
-					f.write(f"#define TI_{name} {hex(valnum)}")
+					f.write(f"#define TI_{name} {value}")
 			if comment is not None:
 				f.write(f" // {comment}")
 			f.write("\n")
